@@ -23,12 +23,6 @@ use App\Http\Controllers\Dashboard\CityController;
 use App\Http\Controllers\Dashboard\CouponController;
 use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\ComplainController;
-use App\Http\Controllers\Site\ContactUsController;
-use App\Http\Controllers\Site\AccountController;
-use App\Http\Controllers\Site\SiteController;
-use App\Http\Controllers\Site\GoogleAuthController;
-use App\Http\Controllers\Site\FacebookAuthController;
-use App\Http\Controllers\Site\PhoneVerificationController;
 use App\Http\Controllers\Dashboard\WithdrawalsController;
 use App\Http\Controllers\Dashboard\ProductVariationController;
 use App\Http\Controllers\Dashboard\CountryContoller;
@@ -36,6 +30,15 @@ use App\Http\Controllers\Dashboard\AjaxController;
 use App\Http\Controllers\Dashboard\ExpensesController;
 use App\Http\Controllers\Dashboard\ChallengeController;
 use App\Http\Controllers\Dashboard\UserChallengeController;
+use App\Http\Controllers\Dashboard\SizeController;
+
+use App\Http\Controllers\Site\ContactUsController;
+use App\Http\Controllers\Site\AccountController;
+use App\Http\Controllers\Site\SiteController;
+use App\Http\Controllers\Site\GoogleAuthController;
+use App\Http\Controllers\Site\FacebookAuthController;
+use App\Http\Controllers\Site\PhoneVerificationController;
+
 use App\Http\Controllers\Testcontroller;
 Route::get('/test' , [TestController::class , 'index'] );
 Route::group([
@@ -51,6 +54,7 @@ Route::group([
 
         Route::group(['prefix' => 'Dashboard' , 'as' => 'dashboard.' , 'middleware' => ['admin'] ], function() {
             Route::get('/',  [DashboardController::class , 'index'] )->name('index');
+            Route::resource('sizes', SizeController::class);
             Route::resource('admins', AdminController::class);
             Route::resource('categories', CategoryController::class);
             Route::resource('brands', BrandController::class);

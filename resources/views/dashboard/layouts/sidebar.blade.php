@@ -8,13 +8,13 @@
 			<div class="sidebar-section-body">
 				<div class="media">
 					<a href="#" class="mr-3">
-						<img src="{{ Storage::url('dashboard_assets/global_assets/images/placeholders/placeholder.jpg') }}" class="rounded-circle" alt="">
+						<img src="{{ asset('dashboard_assets/global_assets/images/placeholders/placeholder.jpg') }}" class="rounded-circle" alt="">
 					</a>
 
 					<div class="media-body">
 						<div class="font-weight-semibold"> {{ Auth::user()->name }} </div>
 						<div class="font-size-sm line-height-sm opacity-50">
-							{{ Auth::user()->email }}
+							مشرف النظام
 						</div>
 					</div>
 
