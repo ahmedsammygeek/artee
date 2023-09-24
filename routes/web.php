@@ -31,6 +31,7 @@ use App\Http\Controllers\Dashboard\ExpensesController;
 use App\Http\Controllers\Dashboard\ChallengeController;
 use App\Http\Controllers\Dashboard\UserChallengeController;
 use App\Http\Controllers\Dashboard\SizeController;
+use App\Http\Controllers\Dashboard\ColorController;
 
 use App\Http\Controllers\Site\ContactUsController;
 use App\Http\Controllers\Site\AccountController;
@@ -55,6 +56,7 @@ Route::group([
         Route::group(['prefix' => 'Dashboard' , 'as' => 'dashboard.' , 'middleware' => ['admin'] ], function() {
             Route::get('/',  [DashboardController::class , 'index'] )->name('index');
             Route::resource('sizes', SizeController::class);
+            Route::resource('colors', ColorController::class);
             Route::resource('admins', AdminController::class);
             Route::resource('categories', CategoryController::class);
             Route::resource('brands', BrandController::class);
