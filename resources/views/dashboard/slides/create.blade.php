@@ -39,32 +39,15 @@
 						<div class="form-group row">
 							<div class="col-md-4">
 								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('slides.image') </label>
-									<input type="file" name="image" class="form-control @error('image') is-invalid @enderror " >
+									<label class="col-form-label"> @lang('slides.image') <span class='text-danger' > * </span> </label>
+									<input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
 									@error('image')
-									<p  class='text-danger' >  {{ $message }} </p>
+									<p class='text-danger' >  {{ $message }} </p>
 									@enderror
 								</div>
 							</div>
 							
-							<div class="col-md-4">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('slides.title_ar') </label>
-									<input type="text" class="form-control @error('title.ar') is-invalid @enderror" name="title[ar]" value="{{ old('title.ar') }}" >
-									@error('title.ar')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('slides.title_en') </label>
-									<input type="text" class="form-control @error('title.en') is-invalid @enderror" name="title[en]" value="{{ old('title.en') }}" >
-									@error('title.en')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
+							
 							<div class="col-md-4">
 								<div  class='mb-2' >
 									<label class="col-form-label"> @lang('slides.link') </label>
@@ -72,6 +55,16 @@
 									@error('link')
 									<p  class='text-danger' >  {{ $message }} </p>
 									@enderror
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<div  class='mb-2' >
+									<label class="col-form-label"> فعال  </label>
+									<div class="custom-control custom-switch mb-2">
+										<input type="checkbox" name="is_active" class="custom-control-input" id='is_active' checked="" >
+										<label class="custom-control-label" for="is_active"> @lang('slides.active') </label>
+									</div>
 								</div>
 							</div>
 						</div>						

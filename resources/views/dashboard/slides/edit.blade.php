@@ -35,7 +35,7 @@
 					<fieldset class="mb-3">
 						<legend class="text-uppercase font-size-sm font-weight-bold">@lang('slides.slide_details')</legend>
 						<div class="form-group row">
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<div  class='mb-2' >
 									<label class="col-form-label"> @lang('slides.image') </label>
 									<input type="file" name="image" class="form-control @error('image') is-invalid @enderror " >
@@ -45,25 +45,7 @@
 								</div>
 							</div>
 
-							<div class="col-md-3">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('slides.title_ar') </label>
-									<input type="text" class="form-control @error('title.ar') is-invalid @enderror" name="title[ar]" value="{{ $slide->getTranslation('title' , 'ar') }}" >
-									@error('title.ar')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('slides.title_en') </label>
-									<input type="text" name='title[en]' value="{{ $slide->getTranslation('title' , 'en') }}" class="form-control @error('title.en') is-invalid @enderror" >
-									@error('title.en')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<div  class='mb-2' >
 									<label class="col-form-label"> @lang('slides.link') </label>
 									<input type="text" name='link' value="{{ $slide->link }}" class="form-control @error('link') is-invalid @enderror" >
@@ -73,11 +55,11 @@
 								</div>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<div  class='mb-2' >
 									<label class="col-form-label"> @lang('slides.activation') </label>
 									<div class="custom-control custom-switch mb-2">
-										<input type="checkbox" name="active" class="custom-control-input" id='sc_ls_c' {{ $slide->active == 1 ? 'checked' : '' }} >
+										<input type="checkbox" name="is_active" class="custom-control-input" id='sc_ls_c' {{ $slide->is_active == 1 ? 'checked' : '' }} >
 										<label class="custom-control-label" for="sc_ls_c"> @lang('slides.active') </label>
 									</div>
 								</div>

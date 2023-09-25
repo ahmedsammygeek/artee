@@ -43,8 +43,7 @@
                     <tr>
                         <th> # </th>
                         <th> </th>
-                        <th> @lang('slides.title_ar') </th>
-                        <th> @lang('slides.title_en') </th>
+                        <th> الرابط </th>
                         <th> @lang('slides.status') </th>
                         <th> @lang('slides.created_at') </th>
                         <th></th>
@@ -60,10 +59,13 @@
                     <tr>
                         <td> {{ $i++ }} </td>
                         <td> <img class='rounded img-preview' src="{{ Storage::url('slides/'.$slide->image) }}" alt=""> </td>
-                        <td> {{ $slide->getTranslation('title' , 'ar') }} </td>
-                        <td> {{ $slide->getTranslation('title' , 'en') }} </td>
+                        <td> 
+                            @if ($slide->link)
+                            <a target="_blank" href="{{ $slide->link }}"> اضغط هنا </a>
+                            @endif
+                        </td>
                         <td>
-                            @switch($slide->active)
+                            @switch($slide->is_active)
                             @case(1)
                             <span  class='badge badge-success'> @lang('slides.active') </span>
                             @break
@@ -135,9 +137,9 @@
                 cancelButtonText: '@lang('dashboard.cancel')'
             }).then((result) => {
                 if (result.isConfirmed) {
-                   Livewire.emit('deleteItem' , id )
-               }
-           })
+                 Livewire.emit('deleteItem' , id )
+             }
+         })
         });
         // $('.form-control-select2').select2();
         $('.form-control-select2').on('change', function (e) {

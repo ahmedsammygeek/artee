@@ -24,11 +24,8 @@ class StoreSlideRequest extends FormRequest
     public function rules()
     {
         return [
-            'title.ar' => 'nullable' , 
-            'title.en' => 'nullable' , 
             'link' => 'nullable' , 
             'image' => 'required' , 
-            
         ];
     }
 }

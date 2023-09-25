@@ -38,24 +38,17 @@
 							<tr>
 								<th> @lang('slides.status') </th>
 								<td>
-									@switch($slide->active)
-                            @case(1)
-                            <span  class='badge badge-success'> @lang('slides.active') </span>
-                            @break
-                            @case(0)
-                            <span  class='badge badge-danger'> @lang('slides.inactive') </span>
-                            @break
-                            @endswitch
+									@switch($slide->is_active)
+									@case(1)
+									<span  class='badge badge-success'> @lang('slides.active') </span>
+									@break
+									@case(0)
+									<span  class='badge badge-danger'> @lang('slides.inactive') </span>
+									@break
+									@endswitch
 								</td>
 							</tr>
-							<tr>
-								<th> @lang('slides.title_ar') </th>
-								<td> {{ $slide->getTranslation('title' , 'ar') }} </td>
-							</tr>
-							<tr>
-								<th> @lang('slides.title_en') </th>
-								<td> {{ $slide->getTranslation('title' , 'en') }} </td>
-							</tr>
+
 							<tr>
 								<th> @lang('slides.link') </th>
 								<td> <a href="{{ $slide->link }}"> {{ $slide->link }} </a> </td>
