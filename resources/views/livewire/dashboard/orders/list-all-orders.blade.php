@@ -85,7 +85,7 @@
                 <tr>
                     <th> # </th>
                     <th> رقم الطلب </th>
-                    <th> المسوق </th>
+                    <th> المستخدم </th>
                     <th> قيمه الطلب </th>
                     <th> حاله الطلب </th>
                     <th> تاريخ الاستلام </th>
@@ -102,8 +102,8 @@
                 <tr>
                     <td> {{ $i++}} </td>
                     <td> {{ $order->number }} </td>
-                    <td> <a target="_blank" href="{{ route('dashboard.marketers.show'  , $order->user_id ) }}"> {{ $order->user?->name }} </a> </td>
-                    <td> {{ $order->total }} <span class='text-muted' > جنيه </span> </td>
+                    <td> <a target="_blank" href="{{ route('dashboard.users.show'  , $order->user_id ) }}"> {{ $order->user?->name }} </a> </td>
+                    <td> {{ $order->total }} <span class='text-muted' > ريال </span> </td>
                     <td> 
                         {{ $order->status?->name }}                            
                     </td>
