@@ -36,23 +36,36 @@ $lang = LaravelLocalization::getCurrentLocale();
 
 
 					<fieldset class="mb-3">
-						<legend class="text-uppercase font-size-sm font-weight-bold">@lang('settings.settings_details')</legend>
+						<legend class="text-uppercase font-size-sm font-weight-bold">
+							البينات
+						</legend>
 						<div class="form-group row">
+
+							<div class="col-md-12">
+								<div  class='mb-2' >
+									<label class="col-form-label">شعار الموقع </label>
+									<input type="file" class="form-control @error('logo') is-invalid @enderror" name="logo"  >
+									@error('logo')
+									<p  class='text-danger' >  {{ $message }} </p>
+									@enderror
+								</div>
+							</div>	
+
 							
 							<div class="col-md-6">
 								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('settings.address_ar') </label>
-									<input type="text" class="form-control @error('address.ar') is-invalid @enderror" name="address[ar]" value="{{ $info->getTranslation('address' , 'ar') }}" >
-									@error('address.ar')
+									<label class="col-form-label"> من نحن بالعربيه </label>
+									<input type="text" class="form-control @error('about_us_ar') is-invalid @enderror" name="about_us_ar" value="{{ $info->getTranslation('about_us' , 'ar') }}" >
+									@error('about_us_ar')
 									<p  class='text-danger' >  {{ $message }} </p>
 									@enderror
 								</div>
 							</div>			
 							<div class="col-md-6">
 								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('settings.address_en') </label>
-									<input type="text" class="form-control @error('address.en') is-invalid @enderror" name="address[en]" value="{{ $info->getTranslation('address' , 'en') }}" >
-									@error('address.en')
+									<label class="col-form-label"> من نحن بالانجليزيه </label>
+									<input type="text" class="form-control @error('about_us_en') is-invalid @enderror" name="about_us_en" value="{{ $info->getTranslation('about_us' , 'en') }}" >
+									@error('about_us_en')
 									<p  class='text-danger' >  {{ $message }} </p>
 									@enderror
 								</div>
@@ -87,15 +100,6 @@ $lang = LaravelLocalization::getCurrentLocale();
 							</div>
 							<div class="col-md-4">
 								<div  class='mb-2' >
-									<label class="col-form-label"> حساب يوتيوب </label>
-									<input type="text" class="form-control @error('youtube') is-invalid @enderror" name="youtube" value="{{ $info->youtube }}" >
-									@error('youtube')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div  class='mb-2' >
 									<label class="col-form-label"> @lang('settings.instgrame') </label>
 									<input type="text" class="form-control @error('instgrame') is-invalid @enderror" name="instgrame" value="{{ $info->instgrame }}" >
 									@error('instgrame')
@@ -113,43 +117,45 @@ $lang = LaravelLocalization::getCurrentLocale();
 								</div>
 							</div>
 
-							<div class="col-md-3">
+							
+							<div class="col-md-4">
 								<div  class='mb-2' >
-									<label class="col-form-label"> قيمه النقاط بالقروش </label>
-									<input type="text" class="form-control @error('points_money') is-invalid @enderror" name="points_money" value="{{ $info->points_money }}" >
-									@error('points_money')
+									<label class="col-form-label"> رابط تطبيق Android </label>
+									<input type="text" class="form-control @error('android_link') is-invalid @enderror" name="android_link" value="{{ $info->android_link }}" >
+									@error('android_link')
+									<p  class='text-danger' >  {{ $message }} </p>
+									@enderror
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div  class='mb-2' >
+									<label class="col-form-label">  رابط تطبيق IOS  </label>
+									<input type="text" class="form-control @error('ios_link') is-invalid @enderror" name="ios_link" value="{{ $info->ios_link }}" >
+									@error('ios_link')
 									<p  class='text-danger' >  {{ $message }} </p>
 									@enderror
 								</div>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-12">
 								<div  class='mb-2' >
-									<label class="col-form-label"> الحد الادنى للنقاط للسحب </label>
-									<input type="text" class="form-control @error('minimam_points_can_be_withdrawald') is-invalid @enderror" name="minimam_points_can_be_withdrawald" value="{{ $info->minimam_points_can_be_withdrawald }}" >
-									@error('minimam_points_can_be_withdrawald')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
+									 <label> عنوان الفرع على الخريطه </label>
+                                    <div id="map" style="width: 100%; height: 400px;"></div>
+                                    <input type="hidden" name="latitude" value="{{ $info->lat }}" id="latitude">
+                                    <input type="hidden" name="longitude" value="{{ $info->long }}" id="longitude">
 								</div>
 							</div>
-							<div class="col-md-3">
+
+							
+
+							<div class="col-md-12">
 								<div  class='mb-2' >
-									<label class="col-form-label"> عدد الساعات قبل نزول ارباح المسوق </label>
-									<input type="text" class="form-control @error('days_to_valid_marketer_money') is-invalid @enderror" name="days_to_valid_marketer_money" value="{{ $info->days_to_valid_marketer_money }}" >
-									@error('days_to_valid_marketer_money')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
+									<label class="col-form-label">شعار الموقع الحالى </label>
+									
+									<img class='img-thumbnail img-responsive' src="{{ Storage::url('settings/'.$info->logo) }}" alt="">
 								</div>
-							</div>
-							<div class="col-md-3">
-								<div  class='mb-2' >
-									<label class="col-form-label"> الحد الادنى لطلب سحب الارباح</label>
-									<input type="text" class="form-control @error('minimam_money_can_be_withdrawald') is-invalid @enderror" name="minimam_money_can_be_withdrawald" value="{{ $info->minimam_money_can_be_withdrawald }}" >
-									@error('minimam_money_can_be_withdrawald')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
+							</div>	
+
 
 						</div>						
 					</fieldset>
@@ -167,3 +173,54 @@ $lang = LaravelLocalization::getCurrentLocale();
 @endsection
 
 
+
+
+
+@section('scripts')
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&amp;libraries=places">
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            var latlng = new google.maps.LatLng({{ $info->lat }}, {{ $info->long }});
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: latlng,
+                zoom: 11,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: 'Set lat/lon values for this property',
+                draggable: true
+            });
+            google.maps.event.addListener(marker, 'dragend', function(event) {
+                document.getElementById("latitude").value = this.getPosition().lat();
+                document.getElementById("longitude").value = this.getPosition().lng();
+            });
+
+
+            $(document).on('click', '.clone', function() {
+
+                var clone = $(this).closest('.col-lg-3').clone();
+                clone.find('.clone').removeClass('btn-success clone').addClass('btn-danger remove').val(
+                    'Remove');
+
+                var value = $(this).closest('.col-lg-3').find('input[name="whatsup[]"]').val();
+
+
+                clone.find('input[name="whatsup[]"]').val('');
+
+                $(this).closest('.row').append(clone);
+            });
+
+
+            $(document).on('click', '.remove', function() {
+                $(this).closest('.col-lg-3').remove();
+            });
+
+
+        });
+    </script>
+@endsection

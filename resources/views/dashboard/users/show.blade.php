@@ -5,7 +5,7 @@
 @endsection
 
 @section('page_header')
-<a href="{{ route('dashboard.marketers.index') }}" class="breadcrumb-item"><i class="icon-users4  mr-2"></i> المسوقين </a>
+<a href="{{ route('dashboard.users.index') }}" class="breadcrumb-item"><i class="icon-users4  mr-2"></i> المسوقين </a>
 <span class="breadcrumb-item active"> عرض بيانات المسوق </span>
 
 @endsection
@@ -20,15 +20,15 @@
 			<div class="card">
 				<div class="card-body text-center">
 					<div class="card-img-actions d-inline-block mb-3">
-						<img class="img-fluid img-thumbnail" src="{{ Storage::url('users/'.$marketer->image) }}" width="170" height="170" alt="">
+						<img class="img-fluid img-thumbnail" src="{{ Storage::url('users/'.$user->image) }}" width="170" height="170" alt="">
 
 					</div>
 
-					<h6 class="font-weight-semibold mb-0"> {{ $marketer->name }} </h6>
-					<span class="d-block opacity-75"> مسوق </span>
+					<h6 class="font-weight-semibold mb-0"> {{ $user->name }} </h6>
+					<span class="d-block opacity-75"> مستخدم </span>
 				</div>
 
-				@include('dashboard.marketers.sidebar')
+				@include('dashboard.users.sidebar')
 			</div>
 		</div>
 	</div>
@@ -37,7 +37,7 @@
 		<div class="tab-pane fade active show" id="profile">
 			<div class="card">
 				<div class="card-header bg-primary text-white header-elements-sm-inline" >
-					<h5 class="card-title"> بيانات المسوق الاساسيه </h5>
+					<h5 class="card-title"> بيانات  المستخدم </h5>
 					<div class="header-elements">
 						<div class="d-flex justify-content-between">
 							<div class="list-icons ml-3">
@@ -54,12 +54,12 @@
 						<tbody>
 							<tr>
 								<th> @lang('admins.created') </th>
-								<td> {{ $marketer->created_at->diffForHumans() }} </td>
+								<td> {{ $user->created_at->diffForHumans() }} </td>
 							</tr>
 							<tr>
 								<th> @lang('admins.status') </th>
 								<td>
-									@switch($marketer->active)
+									@switch($user->active)
 									@case(1)
 									<span  class='badge badge-success'> @lang('admins.active') </span>
 									@break
@@ -71,11 +71,15 @@
 							</tr>
 							<tr>
 								<th> @lang('admins.name') </th>
-								<td> {{ $marketer->name }} </td>
+								<td> {{ $user->name }} </td>
+							</tr>
+							<tr>
+								<th> رقم الجوال </th>
+								<td> {{ $user->phone }} </td>
 							</tr>
 							<tr>
 								<th> @lang('admins.email') </th>
-								<td> {{ $marketer->email }} </td>
+								<td> {{ $user->email }} </td>
 							</tr>
 							
 						</tbody>
@@ -94,6 +98,7 @@
 
 
 @section('scripts')
+
 @endsection
 
 

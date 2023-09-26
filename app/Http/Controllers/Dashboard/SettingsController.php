@@ -31,22 +31,22 @@ class SettingsController extends Controller
     public function update(Request $request)
     {
         $info = Settings::first();
-        $info->setTranslation('address' , 'ar' , $request->address['ar'] );
-        $info->setTranslation('address' , 'en' , $request->address['en'] );
+        $info->setTranslation('about_us' , 'ar' , $request->about_us_ar );
+        $info->setTranslation('about_us' , 'en' , $request->about_us_en );
         $info->email = $request->email;
         $info->phone = $request->phone;
         $info->facebook = $request->facebook;
         $info->twitter = $request->twitter;
         $info->instgrame = $request->instgrame;
-        $info->youtube = $request->youtube;
         $info->lat = $request->latitude;
         $info->long = $request->longitude;
-        $info->points_money = $request->points_money;
-        $info->days_to_valid_marketer_money = $request->days_to_valid_marketer_money;
-        $info->minimam_points_can_be_withdrawald = $request->minimam_points_can_be_withdrawald;
-        $info->minimam_money_can_be_withdrawald = $request->minimam_money_can_be_withdrawald;
+        $info->android_link = $request->android_link;
+        $info->ios_link = $request->ios_link;
+        if ($request->hasFile('logo')) {
+            $info->logo =  basename($request->file('logo')->store('settings'));
+        }
         $info->save();
-        return redirect()->back()->with('success' , trans('settings.editing_success'));
+        return redirect()->back()->with('success' ,  'تم التعديل بنجاح' );
     }
 
     

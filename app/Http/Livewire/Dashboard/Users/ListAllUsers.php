@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Dashboard\Marketers;
+namespace App\Http\Livewire\Dashboard\Users;
 
 use Livewire\Component;
 use App\Models\User;
 use Livewire\WithPagination;
 use App\Jobs\DeleteImagesFromAWSJob;
-class ListAllMarkters extends Component
+class ListAllUsers extends Component
 {
     use WithPagination;
     public $rows = 10;
@@ -18,10 +18,9 @@ class ListAllMarkters extends Component
 
     public function deleteItem($item_id)
     {
-        $marketer = User::find($item_id);
-        $image = 'users/'.$marketer->image;
-        $marketer->delete();
-        DeleteImagesFromAWSJob::dispatch($image);
+        $item = User::find($item_id);
+        $image = 'users/'.$item->image;
+        $item->delete();
         $this->emit('itemDeleted');
         $this->resetPage();
     }
@@ -39,16 +38,13 @@ class ListAllMarkters extends Component
     protected $paginationTheme = 'bootstrap';
     public function render()
     {
-        $marketers = User::query();
+        $users = User::query();
 
-        $marketers->where(function($query){
-            $query->where('type' , User::MARKETER );
-        });
 
-        $marketers->when($this->search , function($query){
+        $users->when($this->search , function($query){
             $query->where('name' , 'LIKE' , '%'.$this->search.'%' )->orWhere('name' , 'LIKE' , '%'.$this->search.'%' )->orWhere('phone' , 'LIKE' , '%'.$this->search.'%' )->orWhere('email' , 'LIKE' , '%'.$this->search.'%' );
         });
-        $marketers = $marketers->latest()->paginate($this->rows);
-        return view('livewire.dashboard.marketers.list-all-markters' , compact('marketers'));
+        $users = $users->latest()->paginate($this->rows);
+        return view('livewire.dashboard.users.list-all-users' , compact('users'));
     }
 }

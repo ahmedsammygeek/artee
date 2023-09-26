@@ -1,7 +1,7 @@
 <div>
     <div class="card">
         <div class="card-header bg-primary text-white header-elements-sm-inline" >
-            <h5 class="card-title"> عرض كافه المسوقيين </h5>
+            <h5 class="card-title"> عرض كافه المستخدمين </h5>
             <div class="header-elements">
                 <div class="d-flex justify-content-between">
                     <div class="list-icons ml-3">
@@ -33,15 +33,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-1" wire:ignore>
-                    <select name="select" wire:model='rows' class="form-control form-control-select2" >
-                        <option value="10"> @lang('dashboard.rows') </option>
-                        <option value="20">20 </option>
-                        <option value="30">30 </option>
-                        <option value="50">50 </option>
-                        <option value="100">100 </option>
-                    </select>
-                </div>
+
             </div>
 
         </div>
@@ -64,17 +56,15 @@
                     @php
                     $i = 1;
                     @endphp
-
-
-                    @foreach ($marketers as $marketer)
+                    @foreach ($users as $user)
                     <tr>
                         <td> {{ $i++ }} </td>
-                        <td> <img class='rounded-circle' width="40" height="40" src="{{ Storage::url('users/'.$marketer->image) }}" alt=""> </td>
-                        <td> {{ $marketer->name }} </td>
-                        <td> {{ $marketer->email }} </td>
-                        <td> {{ $marketer->phone }} </td>
+                        <td> <img class='rounded-circle' width="40" height="40" src="{{ Storage::url('users/'.$user->image) }}" alt=""> </td>
+                        <td> {{ $user->name }} </td>
+                        <td> {{ $user->email }} </td>
+                        <td> {{ $user->phone }} </td>
                         <td>
-                            @switch($marketer->active)
+                            @switch($user->active)
                             @case(1)
                             <span  class='badge badge-success'> @lang('admins.active') </span>
                             @break
@@ -83,11 +73,11 @@
                             @break
                             @endswitch
                         </td>
-                        <td> {{ $marketer->created_at->diffForHumans() }} </td>
+                        <td> {{ $user->created_at->diffForHumans() }} </td>
                         <td>
-                            <a href='{{ route('dashboard.marketers.show' , ['marketer' => $marketer->id ] ) }}' class="btn btn-primary btn-icon"><i class="icon-eye "></i></a>
-                            <a href='{{ route('dashboard.marketers.edit' , ['marketer' => $marketer->id ] ) }}' class="btn btn-warning btn-icon"><i class="icon-database-edit2 "></i></a>
-                            <a class="btn btn-danger btn-icon delete_item"  data-item_id='{{ $marketer->id }}' ><i class="icon-trash "></i></a>
+                            <a href='{{ route('dashboard.users.show' , $user ) }}' class="btn btn-primary btn-icon"><i class="icon-eye "></i></a>
+                          
+                            <a class="btn btn-danger btn-icon delete_item"  data-item_id='{{ $user->id }}' ><i class="icon-trash "></i></a>
                         </td>
                         
                     </tr>
@@ -99,7 +89,7 @@
 
         <div class="card-footer bg-white  py-sm-2">
             <div class='pagination pagination-flat justify-content-around mt-3 mt-sm-0 float-right' >
-                {{ $marketers->links() }}
+                {{ $users->links() }}
             </div>
         </div>
 

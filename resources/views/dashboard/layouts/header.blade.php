@@ -9,9 +9,9 @@
 		</div>
 
 		<div class="navbar-brand text-center text-lg-left">
-			<a href="index.html" class="d-inline-block">
-				<img src="{{ Storage::url('global_assets/images/logo_light.png') }}" class="d-none d-sm-block" alt="">
-				<img src="{{ Storage::url('global_assets/images/logo_icon_light.png') }}" class="d-sm-none" alt="">
+			<a href="{{ route('dashboard.index') }}" class="d-inline-block">
+				<img src="{{ asset('dashboard_assets/global_assets/images/logo.png') }}" class="d-none d-sm-block" alt="">
+				<img src="{{ asset('dashboard_assets/global_assets/images/logo.png') }}" class="d-sm-none" alt="">
 			</a>
 		</div>
 

@@ -38,7 +38,8 @@ $lang = LaravelLocalization::getCurrentLocale();
 	<script src="{{ asset('dashboard_assets/assets/js/app.js') }}"></script>
 	<script src="{{ asset('dashboard_assets/global_assets/js/demo_pages/dashboard.js') }}"></script>
 	<script src="{{ asset('dashboard_assets/global_assets/js/demo_pages/content_cards_header.js') }}"></script>
-	   <script src="{{ asset('site_assets/js/sweetalert2.js') }}"></script>
+	   {{-- <script src="{{ asset('site_assets/js/sweetalert2.js') }}"></script> --}}
+	   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	@livewireScripts
 	@yield('scripts')
 	<!-- /theme JS files -->

@@ -38,7 +38,7 @@
 			<ul class="nav nav-sidebar" data-nav-type="accordion">
 
 				@php
-				$home = $admins = $governorates = $cities = $coupons = $pages = $products = $countries =  $slides = $orders = $settings = $colors = $sizes  = $messages = '';
+				$home = $admins = $governorates = $cities = $coupons = $pages = $products = $countries =  $slides = $orders = $settings = $users = $colors = $sizes  = $messages = '';
 
 
 				switch (request()->segment(3)) {
@@ -47,6 +47,9 @@
 					break;
 					case 'admins':
 					$admins = 'active';
+					break;
+					case 'users':
+					$users = 'active';
 					break;
 					case 'categories':
 					$categories = 'active';
@@ -127,8 +130,17 @@
 						<li class="nav-item"><a href="{{ route('dashboard.admins.create') }}" class="nav-link">@lang('admins.add_new_admin')</a></li>
 					</ul>
 				</li>
-				
 
+
+				
+				<li class="nav-item">
+					<a href="{{ route('dashboard.users.index') }}" class="nav-link {{ $users }}">
+						<i class="icon-users2"></i>
+						<span>
+							المستخدمين
+						</span>
+					</a>
+				</li>
 
 
 				<li class="nav-item nav-item-submenu">

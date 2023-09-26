@@ -10,5 +10,5 @@ class Settings extends Model
     use HasFactory;
     use HasTranslations;
 
-    public $translatable = ['address' , 'name'];
+    public $translatable = ['about_us' ];
 }
