@@ -10,12 +10,12 @@
 
 @section('page_content')
 
-{{-- <div class="row">
+<div class="row">
 	<div class="col-sm-6 col-xl-3">
 		<div class="card card-body">
 			<div class="media">
 				<div class="media-body">
-					<h3 class="font-weight-semibold mb-0">{{ $orders_count }}</h3>
+					<h3 class="font-weight-semibold mb-0"> 0 </h3>
 					<span class="text-uppercase font-size-sm text-muted">عدد الطلبات اليوم</span>
 				</div>
 
@@ -25,25 +25,12 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-6 col-xl-3">
-		<div class="card card-body">
-			<div class="media">
-				<div class="media-body">
-					<h3 class="font-weight-semibold mb-0">{{ $orders_return_count }}</h3>
-					<span class="text-uppercase font-size-sm text-muted">عدد الطلبات المرتجع اليوم</span>
-				</div>
 
-				<div class="ml-3 align-self-center">
-					<i class="icon-cart4 icon-3x text-primary"></i>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="col-sm-6 col-xl-3">
 		<div class="card card-body">
 			<div class="media">
 				<div class="media-body">
-					<h3 class="font-weight-semibold mb-0">{{ $orders_total_income }} جنيه </h3>
+					<h3 class="font-weight-semibold mb-0"> 0 ريال  </h3>
 					<span class="text-uppercase font-size-sm text-muted">اجمالى مبيعات طلبات اليوم </span>
 				</div>
 
@@ -53,28 +40,13 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-6 col-xl-3">
-		<div class="card card-body">
-			<div class="media">
-				<div class="media-body">
-					<h3 class="font-weight-semibold mb-0">{{ $expenses_this_month }} جنيه</h3>
-					<span class="text-uppercase font-size-sm text-muted">اجمالى المصروفات الشهريه</span>
-				</div>
 
-				<div class="ml-3 align-self-center">
-					<i class="icon-cash3 icon-3x text-success"></i>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<hr>
 
 	<div class="col-sm-6 col-xl-3">
 		<div class="card card-body">
 			<div class="media">
 				<div class="media-body">
-					<h3 class="font-weight-semibold mb-0">{{ $marketers_count }} مسوق</h3>
+					<h3 class="font-weight-semibold mb-0"> {{ App\Models\User::count() }} مستخدم </h3>
 					<span class="text-uppercase font-size-sm text-muted">اجمالى عدد المسوقين</span>
 				</div>
 
@@ -90,7 +62,7 @@
 		<div class="card card-body">
 			<div class="media">
 				<div class="media-body">
-					<h3 class="font-weight-semibold mb-0">{{ $products_count }} منتج</h3>
+					<h3 class="font-weight-semibold mb-0">{{ App\Models\Product::count() }} منتج</h3>
 					<span class="text-uppercase font-size-sm text-muted">اجمالى عدد المنتجات</span>
 				</div>
 
@@ -106,8 +78,8 @@
 		<div class="card card-body">
 			<div class="media">
 				<div class="media-body">
-					<h3 class="font-weight-semibold mb-0">{{ $categories_count }} قسم</h3>
-					<span class="text-uppercase font-size-sm text-muted">اجمالى عدد الاقسام</span>
+					<h3 class="font-weight-semibold mb-0"> 0 تصميم</h3>
+					<span class="text-uppercase font-size-sm text-muted">اجمالى عدد التصاميم</span>
 				</div>
 
 				<div class="ml-3 align-self-center">
@@ -123,8 +95,8 @@
 		<div class="card card-body">
 			<div class="media">
 				<div class="media-body">
-					<h3 class="font-weight-semibold mb-0">{{ $brands_count }} ماركه</h3>
-					<span class="text-uppercase font-size-sm text-muted">اجمالى عدد الماركات</span>
+					<h3 class="font-weight-semibold mb-0"> 0 عمليه</h3>
+					<span class="text-uppercase font-size-sm text-muted">اجمالى عدد عمليات الشراء اليوم</span>
 				</div>
 
 				<div class="ml-3 align-self-center">
@@ -134,7 +106,7 @@
 		</div>
 	</div>
 </div>
- --}}
+
 
 
 @endsection
