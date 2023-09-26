@@ -51,27 +51,28 @@
 										</div>
 									</div>
 
-									<div class="col-md-2">
-										<div  class='mb-2' >
-											<label class="col-form-label"> الحد الادنى للتنبيه عند الوصول </label>
-											<input type="text" value='0' name="minimam_stock_alert" class="form-control @error('minimam_stock_alert') is-invalid @enderror " >
-											@error('minimam_stock_alert')
-											<p  class='text-danger' >  {{ $message }} </p>
-											@enderror
-										</div>
-									</div>
-
 
 
 									<div class="col-md-3">
 										<div  class='mb-2' >
-											<label class="col-form-label"> @lang('products.image') </label>
-											<input type="file" name="image" class="form-control @error('image') is-invalid @enderror " >
-											@error('image')
+											<label class="col-form-label"> صور المنتج من الامام  </label>
+											<input type="file" name="front_image" class="form-control @error('front_image') is-invalid @enderror " >
+											@error('front_image')
 											<p  class='text-danger' >  {{ $message }} </p>
 											@enderror
 										</div>
 									</div>
+
+									<div class="col-md-3">
+										<div  class='mb-2' >
+											<label class="col-form-label"> صور المنتج من الخالف  </label>
+											<input type="file" name="back_image" class="form-control @error('back_image') is-invalid @enderror " >
+											@error('back_image')
+											<p  class='text-danger' >  {{ $message }} </p>
+											@enderror
+										</div>
+									</div>
+
 									<div class="col-md-3">
 										<div  class='mb-2' >
 											<label class="col-form-label"> @lang('products.images') </label>
@@ -86,8 +87,8 @@
 									<div class="col-md-6">
 										<div  class='mb-2' >
 											<label class="col-form-label"> اسم المنتج بالعربيه </label>
-											<input type="text" class="form-control @error('name.ar') is-invalid @enderror" name="name[ar]" value="{{ old('name.ar') }}" >
-											@error('name.ar')
+											<input type="text" class="form-control @error('name_ar') is-invalid @enderror" name="name_ar" value="{{ old('name_ar') }}" >
+											@error('name_ar')
 											<p  class='text-danger' >  {{ $message }} </p>
 											@enderror
 										</div>
@@ -95,24 +96,8 @@
 									<div class="col-md-6">
 										<div  class='mb-2' >
 											<label class="col-form-label"> اسم المنتج بالانجليزيه </label>
-											<input type="text" class="form-control @error('name.en') is-invalid @enderror" name="name[en]" value="{{ old('name.en') }}" >
-											@error('name.en')
-											<p  class='text-danger' >  {{ $message }} </p>
-											@enderror
-										</div>
-									</div>
-									
-
-									<div class="col-md-3">
-										<div  class='mb-2' >
-											<label class="col-form-label"> @lang('products.category') </label>
-											<select name="category_id" id="select1" class="form-control ">
-
-												@foreach ($categories as $category)
-												<option value="{{ $category->id }}">{{ $category->name }}</option>
-												@endforeach
-											</select>
-											@error('category_id')
+											<input type="text" class="form-control @error('name_en') is-invalid @enderror" name="name_en" value="{{ old('name_en') }}" >
+											@error('name_en')
 											<p  class='text-danger' >  {{ $message }} </p>
 											@enderror
 										</div>
@@ -120,44 +105,11 @@
 									
 
 
-									<div class="col-md-3">
+									<div class="col-md-4">
 										<div  class='mb-2' >
-											<label class="col-form-label"> @lang('products.brand') </label>
-											<select name="brand_id" id="select5" class="form-control " >
-												<option value=""></option>
-												@foreach ($brands as $brand)
-												<option value="{{ $brand->id }}">{{ $brand->name }}</option>
-												@endforeach
-											</select>
-											@error('brand_id')
-											<p  class='text-danger' >  {{ $message }} </p>
-											@enderror
-										</div>
-									</div>
-
-									<div class="col-md-2">
-										<div  class='mb-2' >
-											<label class="col-form-label"> البارد كود </label>
-											<input type="text" name="barcode" class="form-control @error('barcode') is-invalid @enderror " >
-											@error('barcode')
-											<p  class='text-danger' >  {{ $message }} </p>
-											@enderror
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div  class='mb-2' >
-											<label class="col-form-label"> عدد النقاط </label>
-											<input type="text" name="points" class="form-control @error('points') is-invalid @enderror " >
-											@error('points')
-											<p  class='text-danger' >  {{ $message }} </p>
-											@enderror
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div  class='mb-2' >
-											<label class="col-form-label"> الحد الادنى للبيع بالجمله </label>
-											<input type="text" name="minimam_gomla_number" class="form-control @error('minimam_gomla_number') is-invalid @enderror " >
-											@error('minimam_gomla_number')
+											<label class="col-form-label"> عدد diamonds </label>
+											<input type="text" name="diamonds" class="form-control @error('diamonds') is-invalid @enderror " >
+											@error('diamonds')
 											<p  class='text-danger' >  {{ $message }} </p>
 											@enderror
 										</div>
@@ -165,97 +117,21 @@
 
 
 
-
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<div  class='mb-2' >
-											<label class="col-form-label">وصف بسيط للمنتج بالعربيه</label>
-											<textarea name="mini_description[ar]"  class="form-control" rows="3" > {{ old('mini_description.ar') }} </textarea>
-											@error('mini_description.ar')
-											<p  class='text-danger' >  {{ $message }} </p>
-											@enderror
-										</div>
-									</div>
-
-									<div class="col-md-6">
-										<div  class='mb-2' >
-											<label class="col-form-label">وصف بسيط للمنتج بالانجليزيه </label>
-											<textarea name="mini_description[en]"  class="form-control" rows="3" > {{ old('mini_description.en') }} </textarea>
-											@error('mini_description.en')
-											<p  class='text-danger' >  {{ $message }} </p>
-											@enderror
-										</div>
-									</div>
-
-									<div class="col-md-12">
-										<div  class='mb-2' >
-											<label class="col-form-label"> وصف تفصيلى للمنتج بالعربيه </label>
-											<textarea name="description[ar]"  class="editor form-control" rows="3" > {{ old('description.ar') }} </textarea>
-											@error('description.ar')
-											<p  class='text-danger' >  {{ $message }} </p>
-											@enderror
-										</div>
-									</div>
-
-									<div class="col-md-12">
-										<div  class='mb-2' >
-											<label class="col-form-label"> وصف تفصيلى للمنتج بالانجليزيه </label>
-											<textarea name="description[en]"  class="editor form-control" rows="3" > {{ old('description.en') }} </textarea>
-											@error('description.en')
-											<p  class='text-danger' >  {{ $message }} </p>
-											@enderror
-										</div>
-									</div>
-
-									<div class="col-md-2">
-										<div  class='mb-2' >
-											<label class="col-form-label"> سعر المنتج </label>
-											<input type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" >
+											<label class="col-form-label">  سعر المنتج ى حاله الطباعه فى وجه واحد </label>
+											<input type="number" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" >
 											@error('price')
 											<p  class='text-danger' >  {{ $message }} </p>
 											@enderror
 										</div>
 									</div>
-									<div class="col-md-2">
+
+									<div class="col-md-4">
 										<div  class='mb-2' >
-											<label class="col-form-label"> السعر بعد الخصم </label>
-											<input type="text" class="form-control @error('price_after_discount') is-invalid @enderror" name="price_after_discount" value="{{ old('price_after_discount') }}" >
-											@error('price_after_discount')
-											<p  class='text-danger' >  {{ $message }} </p>
-											@enderror
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div  class='mb-2' >
-											<label class="col-form-label"> نسبه الخصم </label>
-											<input type="text" class="form-control @error('discount_percentage') is-invalid @enderror" name="discount_percentage" value="{{ old('discount_percentage') }}" >
-											@error('discount_percentage')
-											<p  class='text-danger' >  {{ $message }} </p>
-											@enderror
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div  class='mb-2' >
-											<label class="col-form-label"> مبلغ المسوق </label>
-											<input type="text" class="form-control @error('marketer_price') is-invalid @enderror" name="marketer_price" value="{{ old('marketer_price') }}" >
-											@error('marketer_price')
-											<p  class='text-danger' >  {{ $message }} </p>
-											@enderror
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div  class='mb-2' >
-											<label class="col-form-label"> المبلغ الموصى بيه للبيع (الادنى) </label>
-											<input type="number" class="form-control @error('min_price') is-invalid @enderror" name="min_price" value="{{ old('min_price') }}" >
-											@error('min_price')
-											<p  class='text-danger' >  {{ $message }} </p>
-											@enderror
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div  class='mb-2' >
-											<label class="col-form-label">  المبلغ الموصى بيه للبيع (الاعلى) </label>
-											<input type="number" class="form-control @error('max_price') is-invalid @enderror" name="max_price" value="{{ old('max_price') }}" >
-											@error('max_price')
+											<label class="col-form-label">  سعر المنتج فى حاله الطباعه على الوجهين  </label>
+											<input type="number" class="form-control @error('price_full_design') is-invalid @enderror" name="price_full_design" value="{{ old('price_full_design') }}" >
+											@error('price_full_design')
 											<p  class='text-danger' >  {{ $message }} </p>
 											@enderror
 										</div>
@@ -263,9 +139,92 @@
 
 
 
+									<div class="col-md-6">
+										<div  class='mb-2' >
+											<label class="col-form-label"> وصف تفصيلى للمنتج بالعربيه </label>
+											<textarea name="description_ar"  class="form-control" rows="3" > {{ old('description_ar') }} </textarea>
+											@error('description_ar')
+											<p  class='text-danger' >  {{ $message }} </p>
+											@enderror
+										</div>
+									</div>
 
+									<div class="col-md-6">
+										<div  class='mb-2' >
+											<label class="col-form-label"> وصف تفصيلى للمنتج بالانجليزيه </label>
+											<textarea name="description_en"  class="form-control" rows="3" > {{ old('description_en') }} </textarea>
+											@error('description_en')
+											<p  class='text-danger' >  {{ $message }} </p>
+											@enderror
+										</div>
+									</div>
 								</div>			
 							</fieldset>
+
+							<fieldset>
+
+								<div>
+									<button class='btn btn-success add_new_row '> إضافه جديد  </button>
+								</div>
+
+								
+								<div class="main_rows">
+
+									<div class="row main_row"  >
+
+										<div class="col-md-3">
+											<div class="form-group">
+												<label class="col-form-label"> اللون </label>
+												<select name="colors[]" class='select form-control' required id="">
+													@foreach ($colors as $color)
+														<option value="{{ $color->id }}"> {{ $color->name }} </option>
+													@endforeach
+												</select>
+												@error('colors.*')
+												<p class='text-danger' >  {{ $message }} </p>
+												@enderror
+											</div>
+										</div>
+
+										<div class="col-md-3">
+											<div class="form-group">
+												<label class="col-form-label"> المقاس </label>
+												<select name="sizes[]" required class='select form-control' id="">
+													@foreach ($sizes as $size)
+														<option value="{{ $size->id }}"> {{ $size->name }} </option>
+													@endforeach
+												</select>
+												@error('sizes.*')
+												<p class='text-danger' >  {{ $message }} </p>
+												@enderror
+											</div>
+										</div>
+
+
+										<div class="col-md-3">
+											<div class="form-group">
+												<label class="col-form-label"> الكميه المتاحه </label>
+												<input type="number" required class="form-control @error('quantity.*') is-invalid @enderror" name="quantity[]" value="{{ old('quantity.*') }}" >
+												@error('quantity.*')
+												<p  class='text-danger' >  {{ $message }} </p>
+												@enderror
+											</div>
+										</div>
+
+
+										<div class="col-md-3">
+											<div class="form-group">
+												<label class="col-form-label"> خصائص </label> <br>
+												<button title='الغاء' class="btn btn-outline-danger delete_main_row  border-2 ml-2"><i class="icon-trash"></i></button>
+											</div>										
+										</div>
+									</div>
+								
+								</div>
+							</fieldset>
+
+
+
 						</div>
 					</div>
 				</div>
@@ -273,7 +232,7 @@
 				<div class="card-footer bg-white ">
 					<a href="{{ route('dashboard.products.index') }}" class="btn btn-outline-primary w-100 w-sm-auto"> @lang('dashboard.cancel') </a>
 					<button type="submit" name='add' class="btn btn-primary mr-2 mt-sm-0 w-100 w-sm-auto" style="float: left;"> @lang('dashboard.add') </button>
-					<button type="submit" name='add_variations' class="btn btn-primary mr-2 mt-sm-0 w-100 w-sm-auto" style="float: left;"> حفظ و إضافه متغيرات </button>
+					
 				</div>
 			</form>
 		</div>
@@ -283,18 +242,42 @@
 @endsection
 
 @section('scripts')
-
-<script src="{{ Storage::url('dashboard_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
-<script src="https://cdn.tiny.cloud/1/ic4s7prz04qh4jzykmzgizzo1lize2ckglkcjr9ci9sgkbuc/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
 	$(function() {
 
-		tinymce.init({
-			selector: 'textarea.editor',
-			plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-			toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+
+		$(document).on('click', 'button.delete_main_row', function(event) {
+			event.preventDefault();
+			var rows_count = $(document).find('div.main_row').length;
+			if (rows_count > 1 ) {
+				$(this).parent().parent().parent().remove();
+			} else {
+				alert('يجب اضافه متغير واحد على الاقل');
+			}
 		});
 
+		$(document).on('click', 'button.delete_color_row', function(event) {
+			event.preventDefault();
+			$(this).parent().parent().parent().remove();
+		});
+
+
+
+
+		$('button.add_new_row').on('click',  function(event) {
+			event.preventDefault();	
+			rows_count = $(document).find('div.main_row').length;
+			console.log(rows_count);
+			$.ajax({
+				url: '{{ route('dashboard.get_new_varition_main_row') }}',
+				type: 'POST',
+				dataType: 'html',
+				data: {_token: "{{ csrf_token() }}" , 'rows_count':rows_count  },
+			})
+			.done(function(data) {
+				$(document).find('div.main_rows').find('div.main_row').last().after(data);
+			})
+		});
 
 	});
 </script>

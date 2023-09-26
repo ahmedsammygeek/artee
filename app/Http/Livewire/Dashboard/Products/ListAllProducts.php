@@ -39,7 +39,7 @@ class ListAllProducts extends Component
     protected $paginationTheme = 'bootstrap';
     public function render()
     {
-        $products = Product::query()->with(['category']);
+        $products = Product::query()->with(['user']);
 
         if($this->search != '')
             $products = $products->where('name->en' , 'LIKE' , '%'.$this->search.'%' )->orWhere('name->ar' , 'LIKE' , '%'.$this->search.'%' );

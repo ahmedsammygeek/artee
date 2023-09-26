@@ -5,61 +5,52 @@ namespace App\Http\Livewire\Board\Products\Variations;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Models\Variation;
+use App\Models\Color;
+use App\Models\Size;
 class ParentVariation extends Component
 {
     use LivewireAlert;
     public $variant;
-    public $type;
-    public $title;
-    public $barcode;
-    public $price;
+    public $color_id;
+    public $quantity;
+    public $size_id;
 
     protected $listeners = ['variantAdded' => '$refresh' , 'variantDeleted' => '$refresh' ];
 
     public function deleteVariant() {
-        $this->variant->children()->delete();
         $this->variant->delete();
         $this->emit('variantDeleted');
     }
 
     public function mount() {
-        $this->type = $this->variant->type;
-        $this->title = $this->variant->title;
-        $this->barcode = $this->variant->barcode;
-        $this->price = $this->variant->price;
+        $this->color_id = $this->variant->color_id;
+        $this->quantity = $this->variant->quantity;
+        $this->size_id = $this->variant->size_id;
     }
 
-    public function updatedType()
+    public function updatedColorId()
     {
-        $this->variant->type = $this->type;
+        $this->variant->color_id = $this->color_id;
         $this->variant->save();
     }
 
-    public function updatedTitle()
+    public function updatedSizeId()
     {
-        $this->variant->title = $this->title;
+        $this->variant->size_id = $this->size_id;
         $this->variant->save();
     }
 
-    public function updatedPrice()
-    {
-        if ($this->price == null ) {
-            $this->variant->price = null;
-        } else {
-            $this->variant->price = $this->price;
-        }
-        $this->variant->save();
-    }
 
-    public function updatedBarcode()
+    public function updatedQuantity()
     {
-        $this->variant->barcode = $this->barcode;
+        $this->variant->quantity = $this->quantity;
         $this->variant->save();
     }
 
     public function render()
     {
-        $children = Variation::where('parent_id' , $this->variant->id )->get();
-        return view('livewire.board.products.variations.parent-variation' , compact('children'));
+        $colors = Color::all();
+        $sizes = Size::all();
+        return view('livewire.board.products.variations.parent-variation' , compact('sizes' , 'colors' ) );
     }
 }

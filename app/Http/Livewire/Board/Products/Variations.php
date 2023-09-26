@@ -8,7 +8,7 @@ class Variations extends Component
 {
     public $product;
 
-    protected $listeners = ['variantDeleted' ];
+    protected $listeners = ['variantDeleted' , 'variantAdded' => '$refresh'  ];
 
     public function variantDeleted()
     {
@@ -17,7 +17,7 @@ class Variations extends Component
 
     public function render()
     {
-        $variations = Variation::where('product_id' , $this->product->id)->where('type' , '!=' , 'one_size' )->where('parent_id' , null )->get();
+        $variations = Variation::where('product_id' , $this->product->id)->get();
         return view('livewire.board.products.variations' , compact('variations') );
     }
 }

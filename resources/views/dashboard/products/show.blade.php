@@ -14,7 +14,7 @@
 	<div class="col-lg-12">
 		<ul class="nav nav-tabs nav-tabs-solid nav-tabs-solid-custom bg-primary nav-justified">
 			<li class="nav-item"><a href="#colored-justified-tab1" class="nav-link active" data-toggle="tab"> تفاصيل المنتج </a></li>
-			<li class="nav-item"><a href="#colored-justified-tab2" class="nav-link" data-toggle="tab"> المتغيرات </a></li>
+			<li class="nav-item"><a href="#colored-justified-tab2" class="nav-link" data-toggle="tab"> المقاسات و الاحجام </a></li>
 			<li class="nav-item"><a href="#colored-justified-tab3" class="nav-link" data-toggle="tab"> صور المنتج </a></li>
 			<li class="nav-item"><a href="#colored-justified-tab4" class="nav-link" data-toggle="tab"> احصائيات </a></li>
 		</ul>
@@ -53,22 +53,7 @@
 								<th> @lang('products.name_en') </th>
 								<td> {{ $product->getTranslation('name' , 'en') }} </td>
 							</tr>
-							<tr>
-								<th> @lang('products.category') </th>
-								<td> {{ $product->category?->name }} </td>
-							</tr>
-							<tr>
-								<th> @lang('products.brand') </th>
-								<td> {{ $product->brand?->name }} </td>
-							</tr>
-							<tr>
-								<th> @lang('products.mini_description_ar') </th>
-								<td> {!! $product->getTranslation('mini_description' , 'ar') !!} </td>
-							</tr>
-							<tr>
-								<th> @lang('products.mini_description_en') </th>
-								<td> {!! $product->getTranslation('mini_description' , 'en') !!} </td>
-							</tr>
+				
 							<tr>
 								<th> @lang('products.description_ar') </th>
 								<td> {!! $product->getTranslation('description' , 'ar') !!} </td>
@@ -78,55 +63,26 @@
 								<td> {!! $product->getTranslation('description' , 'en') !!} </td>
 							</tr>
 							<tr>
-								<th> سعر المنتج </th>
+								<th>  سعر المنتج ى حاله الطباعه فى وجه واحد  </th>
 								<td> {{ $product->price }} <span class='text-muted' > جنيه </span> </td>
 							</tr>
+
 							<tr>
-								<th>السعر بعد الخصم </th>
-								<td> {{  $product->price_after_discount }} <span class='text-muted' > جنيه </span> </td>
+								<th>  سعر المنتج فى حاله الطباعه على الوجهين   </th>
+								<td> {{ $product->price_full_design }} <span class='text-muted' > جنيه </span> </td>
 							</tr>
+	
 							<tr>
-								<th> نسبه الخصم </th>
-								<td> {{ $product->discount_percentage }} <span class='text-muted' > جنيه </span> </td>
+								<th> عدد diamonds </th>
+								<td> {{  $product->diamonds }} <span class='text-muted' > نقطه </span> </td>
 							</tr>
-							<tr>
-								<th> عدد النقاط </th>
-								<td> {{  $product->points }} <span class='text-muted' > نقطه </span> </td>
-							</tr>
-							<tr>
-								<th> الحد الادنى لللبيع بالجمله </th>
-								<td> {{ $product->minimam_gomla_number }} </td>
-							</tr>
-							<tr>
-								<th> الباركود </th>
-								<td> {{ $product->barcode }} </td>
-							</tr>
-							<tr>
-								<th> مبلغ المسوق </th>
-								<td> {{ $product->marketer_price }} <span class='text-muted' > جنيه </span> </td>
-							</tr>
-							<tr>
-								<th> المبلغ المقترح للبيع (الحد الادنى) </th>
-								<td> {{ $product->min_price }} <span class='text-muted' > جنيه </span> </td>
-							</tr>
-							<tr>
-								<th> المبلغ المقترح للبيع (الحد الاعلى) </th>
-								<td> {{ $product->max_price }} <span class='text-muted' > جنيه </span> </td>
-							</tr>
+		
+
 							<tr>
 								<th> تقيم المنتج </th>
 								<td> {{ $product->rate }} </td>
 							</tr>							
-							<tr>
-								<th> الكميات </th>
-								<td>
-									<ul>
-										@foreach ($product->warehouses as $product_warehouse)
-										<li> {{ $product_warehouse->warehouse?->name }} => {{ $product_warehouse->quantity }} قطعه</li>
-										@endforeach
-									</ul>
-								</td>
-							</tr>
+							
 							<tr>
 								<th> صوره المنتج الرئيسيه </th>
 								<td> <a href="{{ Storage::url('products/'.$product->image) }}"> <img class='rounded img-preview' data-popup="lightbox" data-gallery="gallery1" src="{{ Storage::url('products/'.$product->image) }}" alt=""> </a> </td>
@@ -147,33 +103,23 @@
 			<div class="tab-pane fade" id="colored-justified-tab4">
 				<div class="card card-body">
 					<div class="row text-center">
-						<div class="col-2">
+						<div class="col-3">
 							<p><i class="icon-cart2 icon-2x d-inline-block text-info"></i></p>
 							<h5 class="font-weight-semibold mb-0">{{ $product->sales_count }} <span class="text-muted"> عمليه شراء </span> </h5>
 							<span class="text-muted font-size-sm">عدد مرات البيع</span>
 						</div>
 
-						<div class="col-2">
-							<p><i class="icon-point-up icon-2x d-inline-block text-warning"></i></p>
-							<h5 class="font-weight-semibold mb-0"> {{ $product->return_count }} <span class="text-muted"> مرتجع </span> </h5>
-							<span class="text-muted font-size-sm">عدد مرات الارجاع</span>
-						</div>
-
-						<div class="col-2">
+						<div class="col-3">
 							<p><i class="icon-eye icon-2x d-inline-block text-success"></i></p>
 							<h5 class="font-weight-semibold mb-0"> {{ $product->views_count }} <span class="text-muted"> مره </span> </h5>
 							<span class="text-muted font-size-sm">عدد مرات المشاهده</span>
 						</div>
-						<div class="col-2">
+						<div class="col-3">
 							<p><i class="icon-cash3 icon-2x d-inline-block text-success"></i></p>
 							<h5 class="font-weight-semibold mb-0"> {{ $product->total_sales }} <span class="text-muted"> جنيه </span> </h5>
 							<span class="text-muted font-size-sm">اجمالى مبيعات المنتج</span>
 						</div>
-						<div class="col-2">
-							<p><i class="icon-cash3 icon-2x d-inline-block text-success"></i></p>
-							<h5 class="font-weight-semibold mb-0"> {{ $product->total_marketers_sales }} <span class="text-muted"> جنيه </span> </h5>
-							<span class="text-muted font-size-sm">اجمالى ارباح المسوقين </span>
-						</div>
+				
 					</div>
 				</div>
 			</div>
@@ -183,8 +129,8 @@
 @endsection
 
 @section('scripts')
-<script src="{{ Storage::url('dashboard_assets/global_assets/js/plugins/media/glightbox.min.js') }}"></script>
-<script src="{{ Storage::url('dashboard_assets/global_assets/js/demo_pages/gallery.js') }}"></script>
+<script src="{{ asset('dashboard_assets/global_assets/js/plugins/media/glightbox.min.js') }}"></script>
+<script src="{{ asset('dashboard_assets/global_assets/js/demo_pages/gallery.js') }}"></script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>

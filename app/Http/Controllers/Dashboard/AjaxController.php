@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Size;
+use App\Models\Color;
 class AjaxController extends Controller
 {
     /**
@@ -14,8 +15,9 @@ class AjaxController extends Controller
      */
     public function get_new_varition_main_row(Request $request)
     {
-        $rows_count = $request->rows_count;
-        return view('dashboard.ajax.new_varition_main_row' , compact('rows_count'));
+        $sizes = Size::all();
+        $colors = Color::all();
+        return view('dashboard.ajax.new_varition_main_row' , compact('colors' , 'sizes' ));
     }
 
     /**

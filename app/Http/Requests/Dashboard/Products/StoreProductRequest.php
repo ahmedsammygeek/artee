@@ -24,30 +24,18 @@ class StoreProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'barcode' => 'required',
-            'name.ar' => 'required', 
-            'name.en' => 'required', 
-            'category_id' => 'required' , 
-            'brand_id' => 'nullable' , 
-            'description.ar' => 'nullable' ,  
-            'description.en' => 'nullable' ,  
-            'min_description.ar' => 'nullable' , 
-            'min_description.en' => 'nullable' , 
-            'image' => 'nullable|image' , 
+            'name_ar' => 'required', 
+            'name_en' => 'required', 
+            'description_ar' => 'nullable' ,  
+            'description_en' => 'nullable' ,  
+            'front_image' => 'required|image' , 
+            'back_image' => 'required|image' , 
             'images' => 'nullable'  , 
             'images.*' => 'image' , 
-            'marketer_price' => 'required' , 
             'price' => 'required' , 
-            'price_after_discount' => 'nullable' , 
-            'discount_percentage' => 'nullable' , 
-            'warehouses' => 'nullable' , 
-            'quantity' => 'nullable' , 
-            'points' => 'nullable' , 
-            'minimam_gomla_number' => 'nullable' , 
-            'minimam_stock_alert' => 'required' , 
+            'price_full_design' => 'required' , 
+            'diamonds' => 'required' , 
             'country_id' => 'required' , 
-            'min_price' => 'required' , 
-            'max_price' => 'required' , 
         ];
     }
 }

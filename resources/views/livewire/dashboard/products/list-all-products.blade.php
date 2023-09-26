@@ -60,9 +60,9 @@
                     @foreach ($products as $product)
                     <tr>
                         <td> {{ $product->id }} </td>
-                        <td> <a href="{{ Storage::url('products/'.$product->image) }}"> <img class='rounded img-preview' data-popup="lightbox" data-gallery="gallery1" src="{{ Storage::url('products/'.$product->image) }}" alt=""> </a> </td>
+                        <td> <a href="{{ Storage::url('products/'.$product->front_image) }}"> <img class='rounded img-preview' data-popup="lightbox" data-gallery="gallery1" src="{{ Storage::url('products/'.$product->front_image) }}" alt=""> </a> </td>
                         <td> {{ $product->getTranslation('name' , 'ar') }} </td>
-                        <td> {{ $product->category?->name }} </td>
+                        <td> {{ $product->user?->name }} </td>
                         <td>
                             @switch($product->active)
                             @case(1)
@@ -98,8 +98,8 @@
 
 @section('scripts')
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{ Storage::url('dashboard_assets/global_assets/js/plugins/media/glightbox.min.js') }}"></script>
-<script src="{{ Storage::url('dashboard_assets/global_assets/js/demo_pages/gallery.js') }}"></script>
+<script src="{{ asset('dashboard_assets/global_assets/js/plugins/media/glightbox.min.js') }}"></script>
+<script src="{{ asset('dashboard_assets/global_assets/js/demo_pages/gallery.js') }}"></script>
 
 <script>
     $(document).ready(function () {

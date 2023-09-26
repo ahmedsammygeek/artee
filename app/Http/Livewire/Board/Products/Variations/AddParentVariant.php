@@ -6,57 +6,43 @@ use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\WithFileUploads;
 use App\Models\Variation;
+use App\Models\Color;
+use App\Models\Size;
 use Auth;
 class AddParentVariant extends Component
 {
 
     use LivewireAlert;
     use WithFileUploads;
-    public $variantId;
-    public $variant;
-    public $title;
-    public $barcode;
-    public $price;
-    public $color;
-    public $images;
+    public $product;
+    public $color_id;
+    public $size_id;
+    public $quantity;
 
 
     protected $rules = [
-        'title' => 'required',
-        'barcode' => 'nullable',
-        'price' => 'nullable',
-        'color' => 'required',
-        'images.*' => 'required|image'
+        'color_id' => 'required',
+        'size_id' => 'nullable',
+        'quantity' => 'required',
     ];
 
 
     protected $listeners = ['openModal'];
-
-    public function openModal($variantId) {
-        $this->variantId = $variantId;
-        $this->emit('open_add_modal');
-        $this->variant = Variation::find($variantId);
-    }
 
 
     public function save()
     {
         $this->validate();
         $variant = new Variation;
-        $variant->parent_id = $this->variantId;
-        $variant->title = $this->title;
-        $variant->barcode = $this->barcode;
-        $variant->price = $this->price;
-        $variant->color = $this->color;
-        $variant->type = 'color';
+        $variant->product_id = $this->product->id;
+        $variant->color_id = $this->color_id;
+        $variant->size_id = $this->size_id;
+        $variant->quantity = $this->quantity;
         $variant->user_id = Auth::id();
-        $variant->product_id = $this->variant->product_id;
         $variant->save();
-        $this->barcode = null;
-        $this->title = null;
-        $this->price = null;
-        $this->color = null;
-        $this->images = null;
+        $this->color_id = null;
+        $this->size_id = null;
+        $this->quantity = null;
         $this->emit('close_add_modal');
         $this->emit('variantAdded');
         $this->alert('success' , 'تم الاضافه بنجاح' );
@@ -65,6 +51,8 @@ class AddParentVariant extends Component
 
     public function render()
     {
-        return view('livewire.board.products.variations.add-parent-variant');
+        $colors = Color::all();
+        $sizes = Size::all();
+        return view('livewire.board.products.variations.add-parent-variant' , compact('sizes' , 'colors' ) );
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Dashboard\Products;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Request;
 class UpdateProductRequest extends FormRequest
 {
     /**
@@ -23,31 +22,19 @@ class UpdateProductRequest extends FormRequest
      */
     public function rules()
     {
-        $id = Request::segment(4);
         return [
-            'barcode' => 'required|unique:products,barcode,'.$id,
-            'name.ar' => 'required', 
-            'name.en' => 'required', 
-            'category_id' => 'required' , 
-            'brand_id' => 'nullable' , 
-            'description.en' => 'nullable' , 
-            'description.ar' => 'nullable' , 
-            'min_description.en' => 'nullable' , 
-            'min_description.ar' => 'nullable' , 
-            'image' => 'nullable|image' , 
+            'name_ar' => 'required', 
+            'name_en' => 'required', 
+            'description_ar' => 'nullable' ,  
+            'description_en' => 'nullable' ,  
+            'front_image' => 'nullable|image' , 
+            'back_image' => 'nullable|image' , 
             'images' => 'nullable'  , 
-            'images.*' => 'image' ,  
-            'active' => 'nullable' , 
-            'marketer_price' => 'required' , 
+            'images.*' => 'image' , 
             'price' => 'required' , 
-            'price_after_discount' => 'nullable' , 
-            'discount_percentage' => 'nullable' , 
-            'points' => 'nullable' , 
-            'minimam_gomla_number' => 'nullable' , 
-            'minimam_stock_alert' => 'required' , 
+            'price_full_design' => 'required' , 
+            'diamonds' => 'required' , 
             'country_id' => 'required' , 
-            'min_price' => 'required' , 
-            'max_price' => 'required' , 
         ];
     }
 }

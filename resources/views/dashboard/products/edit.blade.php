@@ -1,23 +1,22 @@
 @extends('dashboard.layouts.master')
 
 @section('page_title')
-{{ trans('products.edit_product_details') }}
+تعديل بيانات المنتج 
 @endsection
 
 @section('page_header')
 <a href="{{ route('dashboard.products.index') }}" class="breadcrumb-item"><i class="icon-ampersand  mr-2"></i> @lang('products.products')</a>
-<span class="breadcrumb-item active"> @lang('products.edit_product_details') </span>
+<span class="breadcrumb-item active"> تعديل بيانات المنتج </span>
 @endsection
 
 @section('page_content')
 
 <div class="row">
 	<div class="col-md-12">
-		@include('dashboard.layouts.messages')
-		
 		<div class="card">
+			
 			<div class="card-header bg-primary text-white header-elements-sm-inline" >
-				<h5 class="card-title"> @lang('products.edit_product_details') </h5>
+				<h5 class="card-title"> تعديل بيانات المنتج </h5>
 				<div class="header-elements">
 					<div class="d-flex justify-content-between">
 						<div class="list-icons ml-3">
@@ -28,263 +27,173 @@
 					</div>
 				</div>
 			</div>
-			<form action="{{ route('dashboard.products.update' , ['product' => $product->id ]) }}" method='POST' enctype="multipart/form-data" > 
+			<form action="{{ route('dashboard.products.update'  , $product ) }}" method='POST' enctype="multipart/form-data" > 
 				@csrf
 				@method('PATCH')
 				<div class="card-body">
-					<fieldset class="mb-3">
-						<legend class="text-uppercase font-size-sm font-weight-bold">@lang('products.product_details')
-						</legend>
-						<div class="form-group row">
-							<div class="col-md-3">
-								<div  class='mb-2' >
-									<label class="col-form-label"> الدوله </label>
-									<select class='form-control' name="country_id" id="">
-										@foreach ($countries as $country)
-										<option value="{{ $country->id }}" {{ $country->id == $product->country_id ? 'selected="selected"' : '' }} > {{ $country->name }} </option>
-										@endforeach
-									</select>
-									@error('image')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
 
-							<div class="col-md-2">
-								<div  class='mb-2' >
-									<label class="col-form-label"> الحد الادنى للتنبيه عند الوصول </label>
-									<input type="text" value='{{ $product->minimam_stock_alert }}' name="minimam_stock_alert" class="form-control @error('minimam_stock_alert') is-invalid @enderror " >
-									@error('minimam_stock_alert')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-
-							<div class="col-md-3">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('products.image') </label>
-									<input type="file" name="image" class="form-control @error('image') is-invalid @enderror " >
-									@error('image')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('products.images') </label>
-									<input type="file" name="images[]" multiple='multiple' class="form-control @error('images') is-invalid @enderror " >
-									@error('images')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('products.name_ar') </label>
-									<input type="text" class="form-control @error('name.ar') is-invalid @enderror" name="name[ar]" value="{{ $product->getTranslation('name' , 'ar') }}" >
-									@error('name.ar')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('products.name_en') </label>
-									<input type="text" class="form-control @error('name.en') is-invalid @enderror" name="name[en]" value="{{ $product->getTranslation('name' , 'en') }}" >
-									@error('name.en')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							
-							<div class="col-md-3">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('products.category') </label>
-									<select name="category_id" id="inputCate" class="form-control" required="required">
-										<option value=""></option>
-										@foreach ($categories as $category)
-										<option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected="selected"' : '' }} >{{ $category->name }}</option>
-										@endforeach
-									</select>
-									@error('category_id')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('products.brand') </label>
-									<select name="brand_id" id="inputCate" class="form-control" >
-										<option value=""></option>
-										@foreach ($brands as $brand)
-										<option value="{{ $brand->id }}" {{ $product->brand_id == $brand->id ? 'selected="selected"' : '' }} >{{ $brand->name }}</option>
-										@endforeach
-									</select>
-									@error('brand_id')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							
+					<div class="tab-content">
+						<div class="tab-pane fade show active" id="solid-justified-tab1">
+							<fieldset class="mb-3">
+								<div class="form-group row">
 
 
-
-							
-
-							<div class="col-md-2">
-								<div  class='mb-2' >
-									<label class="col-form-label"> البارد كود </label>
-									<input type="text" name="barcode" value="{{ $product->barcode }}" class="form-control @error('barcode') is-invalid @enderror " >
-									@error('barcode')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-
-							<div class="col-md-2">
-								<div  class='mb-2' >
-									<label class="col-form-label"> عدد النقاط </label>
-									<input type="text" name="points" value="{{ $product->points }}" class="form-control @error('points') is-invalid @enderror " >
-									@error('points')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							<div class="col-md-2">
-								<div  class='mb-2' >
-									<label class="col-form-label"> الحد الادنى للبيع بالجمله </label>
-									<input type="text" name="minimam_gomla_number" value="{{ $product->minimam_gomla_number }}" class="form-control @error('minimam_gomla_number') is-invalid @enderror " >
-									@error('minimam_gomla_number')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-
-
-
-
-							<div class="col-md-6">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('products.mini_description_ar') </label>
-									<textarea name="mini_description[ar]"  class="form-control" rows="3" > {{  $product->getTranslation('mini_description' , 'ar') }} </textarea>
-									@error('mini_description.ar')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('products.mini_description_en') </label>
-									<textarea name="mini_description[en]"  class="form-control" rows="3" > {{  $product->getTranslation('mini_description' , 'en') }} </textarea>
-									@error('mini_description.en')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-
-							<div class="col-md-12">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('products.description_ar') </label>
-									<textarea name="description[ar]"  class="form-control" rows="3" > {!! $product->getTranslation('description' , 'ar') !!} </textarea>
-									@error('description.ar')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('products.description_en') </label>
-									<textarea name="description[en]"  class="form-control" rows="3" > {!! $product->getTranslation('description' , 'en') !!} </textarea>
-									@error('description.en')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-
-							<div class="col-md-2">
-								<div  class='mb-2' >
-									<label class="col-form-label"> سعر المنتج </label>
-									<input type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ $product->price }}" >
-									@error('price')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							<div class="col-md-2">
-								<div  class='mb-2' >
-									<label class="col-form-label"> السعر بعد الخصم </label>
-									<input type="text" class="form-control @error('price_after_discount') is-invalid @enderror" name="price_after_discount" value="{{ $product->price_after_discount }}" >
-									@error('price_after_discount')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							<div class="col-md-2">
-								<div  class='mb-2' >
-									<label class="col-form-label"> نسبه الخصم </label>
-									<input type="text" class="form-control @error('discount_percentage') is-invalid @enderror" name="discount_percentage" value="{{ $product->discount_percentage }}" >
-									@error('discount_percentage')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							<div class="col-md-2">
-								<div  class='mb-2' >
-									<label class="col-form-label"> مبلغ المسوق </label>
-									<input type="text" class="form-control @error('marketer_price') is-invalid @enderror" name="marketer_price" value="{{ $product->marketer_price }}" >
-									@error('marketer_price')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
-							<div class="col-md-2">
+									<div class="col-md-3">
 										<div  class='mb-2' >
-											<label class="col-form-label"> المبلغ الموصى بيه للبيع (الادنى) </label>
-											<input type="number" class="form-control @error('min_price') is-invalid @enderror" name="min_price" value="{{ $product->min_price }}" >
-											@error('min_price')
-											<p  class='text-danger' >  {{ $message }} </p>
-											@enderror
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div  class='mb-2' >
-											<label class="col-form-label">  المبلغ الموصى بيه للبيع (الاعلى) </label>
-											<input type="number" class="form-control @error('max_price') is-invalid @enderror" name="max_price" value="{{ $product->max_price }}" >
-											@error('max_price')
+											<label class="col-form-label"> الدوله </label>
+											<select class='form-control' name="country_id" id="">
+												@foreach ($countries as $country)
+												<option value="{{ $country->id }}"{{ $country->id == $product->country_id ? 'selected="selected"' : '' }} > {{ $country->name }} </option>
+												@endforeach
+											</select>
+											@error('image')
 											<p  class='text-danger' >  {{ $message }} </p>
 											@enderror
 										</div>
 									</div>
 
 
-							<div class="col-md-12">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('products.active') </label>
-									<div class="custom-control custom-switch mb-2">
-										<input type="checkbox" name="active" class="custom-control-input" id="sc_ls_c" checked>
-										<label class="custom-control-label" for="sc_ls_c"> @lang('products.yes') </label>
+
+									<div class="col-md-3">
+										<div  class='mb-2' >
+											<label class="col-form-label"> صور المنتج من الامام  </label>
+											<input type="file" name="front_image" class="form-control @error('front_image') is-invalid @enderror " >
+											@error('front_image')
+											<p  class='text-danger' >  {{ $message }} </p>
+											@enderror
+										</div>
 									</div>
-									@error('active')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
+
+									<div class="col-md-3">
+										<div  class='mb-2' >
+											<label class="col-form-label"> صور المنتج من الخالف  </label>
+											<input type="file" name="back_image" class="form-control @error('back_image') is-invalid @enderror " >
+											@error('back_image')
+											<p  class='text-danger' >  {{ $message }} </p>
+											@enderror
+										</div>
+									</div>
+
+									<div class="col-md-3">
+										<div  class='mb-2' >
+											<label class="col-form-label"> @lang('products.images') </label>
+											<input type="file" name="images[]" multiple='multiple' class="form-control @error('images') is-invalid @enderror " >
+											@error('images')
+											<p  class='text-danger' >  {{ $message }} </p>
+											@enderror
+										</div>
+									</div>
 
 
-							<div class="col-md-6">
-								<div  class='mb-2' >
-									<label class="col-form-label"> @lang('products.current_image') </label>
-									<img class="img-responsive img-thumbnail" src="{{ Storage::url('products/'.$product->image) }}" alt="">
-								</div>
-							</div>			
-						</div>						
-					</fieldset>
+									<div class="col-md-6">
+										<div  class='mb-2' >
+											<label class="col-form-label"> اسم المنتج بالعربيه </label>
+											<input type="text" class="form-control @error('name_ar') is-invalid @enderror" name="name_ar" value="{{ $product->getTranslation('name' , 'ar') }}" >
+											@error('name_ar')
+											<p  class='text-danger' >  {{ $message }} </p>
+											@enderror
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div  class='mb-2' >
+											<label class="col-form-label"> اسم المنتج بالانجليزيه </label>
+											<input type="text" class="form-control @error('name_en') is-invalid @enderror" name="name_en" value="{{ $product->getTranslation('name' , 'en') }}" >
+											@error('name_en')
+											<p  class='text-danger' >  {{ $message }} </p>
+											@enderror
+										</div>
+									</div>
+									
+
+
+									<div class="col-md-4">
+										<div  class='mb-2' >
+											<label class="col-form-label"> عدد diamonds </label>
+											<input type="text" name="diamonds" value='{{ $product->diamonds }}' class="form-control @error('diamonds') is-invalid @enderror " >
+											@error('diamonds')
+											<p  class='text-danger' >  {{ $message }} </p>
+											@enderror
+										</div>
+									</div>
+
+
+
+									<div class="col-md-4">
+										<div  class='mb-2' >
+											<label class="col-form-label">  سعر المنتج ى حاله الطباعه فى وجه واحد </label>
+											<input type="number" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ $product->price }}" >
+											@error('price')
+											<p  class='text-danger' >  {{ $message }} </p>
+											@enderror
+										</div>
+									</div>
+
+									<div class="col-md-4">
+										<div  class='mb-2' >
+											<label class="col-form-label">  سعر المنتج فى حاله الطباعه على الوجهين  </label>
+											<input type="number" class="form-control @error('price_full_design') is-invalid @enderror" name="price_full_design" value="{{ $product->price_full_design }}" >
+											@error('price_full_design')
+											<p  class='text-danger' >  {{ $message }} </p>
+											@enderror
+										</div>
+									</div>
+
+
+
+									<div class="col-md-6">
+										<div  class='mb-2' >
+											<label class="col-form-label"> وصف تفصيلى للمنتج بالعربيه </label>
+											<textarea name="description_ar"  class="form-control" rows="3" > {{ $product->getTranslation('description' , 'ar' ) }} </textarea>
+											@error('description_ar')
+											<p  class='text-danger' >  {{ $message }} </p>
+											@enderror
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div  class='mb-2' >
+											<label class="col-form-label"> وصف تفصيلى للمنتج بالانجليزيه </label>
+											<textarea name="description_en"  class="form-control" rows="3" > {{ $product->getTranslation('description' , 'en' ) }} </textarea>
+											@error('description_en')
+											<p  class='text-danger' >  {{ $message }} </p>
+											@enderror
+										</div>
+									</div>
+
+
+									<div class="col-md-12">
+										<div  class='mb-2' >
+											<label class="col-form-label"> 
+												صور المنتج من الامام
+											</label>
+											<img class='img-thumbnail img-responsive' src="{{ Storage::url('products/'.$product->front_image) }}" alt="">
+										</div>
+									</div>
+
+
+									<div class="col-md-12">
+										<div  class='mb-2' >
+											<label class="col-form-label"> 
+											صور المنتج من الخالف		
+											</label>
+											<img class='img-thumbnail img-responsive' src="{{ Storage::url('products/'.$product->back_image) }}" alt="">
+										</div>
+									</div>
+
+
+
+
+
+								</div>			
+							</fieldset>
+						</div>
+					</div>
 				</div>
 
-				<div class="card-footer bg-white d-sm-flex justify-content-sm-between align-items-sm-center py-sm-2">
+				<div class="card-footer bg-white ">
 					<a href="{{ route('dashboard.products.index') }}" class="btn btn-outline-primary w-100 w-sm-auto"> @lang('dashboard.cancel') </a>
-					<button type="submit" class="btn btn-primary mt-3 mt-sm-0 w-100 w-sm-auto"> @lang('dashboard.edit') </button>
+					<button type="submit" name='add' class="btn btn-primary mr-2 mt-sm-0 w-100 w-sm-auto" style="float: left;"> تعديل </button>
+					
 				</div>
 			</form>
 		</div>
@@ -295,19 +204,5 @@
 
 @section('scripts')
 
-<script src="{{ Storage::url('dashboard_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
-<script src="https://cdn.tiny.cloud/1/ic4s7prz04qh4jzykmzgizzo1lize2ckglkcjr9ci9sgkbuc/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-<script>
-	$(function() {
-
-    tinymce.init({
-      selector: 'textarea.editor',
-      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-    });
- 
-
-	});
-</script>
 
 @endsection

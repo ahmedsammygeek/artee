@@ -38,7 +38,7 @@
 			<ul class="nav nav-sidebar" data-nav-type="accordion">
 
 				@php
-				$home = $admins = $brands = $governorates = $cities = $coupons = $categories = $marketers  = $pages = $products = $withdrawals = $countries = $expenses = $challenges  = $slides = $orders = $complains = $settings = $warehouses = $messages = '';
+				$home = $admins = $governorates = $cities = $coupons = $pages = $products = $countries =  $slides = $orders = $settings = $colors = $sizes  = $messages = '';
 
 
 				switch (request()->segment(3)) {
@@ -51,23 +51,20 @@
 					case 'categories':
 					$categories = 'active';
 					break;
+					case 'colors':
+					$colors = 'active';
+					break;
+					case 'sizes':
+					$sizes = 'active';
+					break;
 					case 'pages':
 					$pages = 'active';
 					break;
 					case 'products':
 					$products = 'active';
 					break;
-					case 'marketers':
-					$marketers = 'active';
-					break;
 					case 'slides':
 					$slides = 'active';
-					break;
-					case 'brands':
-					$brands = 'active';
-					break;
-					case 'challenges':
-					$challenges = 'active';
 					break;
 					case 'settings':
 					$settings = 'active';
@@ -87,21 +84,10 @@
 					case 'coupons':
 					$coupons = 'active';
 					break;
-					case 'complains':
-					$complains = 'active';
-					break;
-					case 'warehouses':
-					$warehouses = 'active';
-					break;
 					case 'orders':
 					$orders = 'active';
 					break;
-					case 'expenses':
-					$expenses = 'active';
-					break;
-					case 'withdrawals':
-					$withdrawals = 'active';
-					break;
+
 					default:
 					break;
 				}
@@ -131,16 +117,7 @@
 						<span class="badge badge-primary align-self-center ml-auto"> {{ $data['unrd_mssages_count'] }} </span>
 					</a>
 				</li>
-				<li class="nav-item">
-					<a href="{{ route('dashboard.complains.index') }}" class="nav-link {{ $complains }}">
-						<i class="icon-envelop4 "></i>
-						<span>  الشكاوى و الاقتراحات </span>
-						<span class="badge badge-primary align-self-center ml-auto"> {{ $data['unrd_complains_count'] }} </span>
-					</a>
-				</li>
 
-
-				<!-- /main -->
 
 
 				<li class="nav-item nav-item-submenu ">
@@ -150,31 +127,34 @@
 						<li class="nav-item"><a href="{{ route('dashboard.admins.create') }}" class="nav-link">@lang('admins.add_new_admin')</a></li>
 					</ul>
 				</li>
-				<li class="nav-item nav-item-submenu ">
-					<a href="#" class="nav-link {{ $marketers }}"><i class="icon-users"></i> <span> المسوقين </span></a>
-					<ul class="nav nav-group-sub" >
-						<li class="nav-item"><a href="{{ route('dashboard.marketers.index') }}" class="nav-link"> عرض كافه المسوقين </a></li>
-						<li class="nav-item"><a href="{{ route('dashboard.marketers.create') }}" class="nav-link"> إضافه مسوق جديد </a></li>
-					</ul>
-				</li>
+				
 
-				<li class="nav-item nav-item-submenu">
-					<a href="#" class="nav-link {{ $categories }}"><i class="icon-equalizer "></i> <span> @lang('categories.categories') </span></a>
-					<ul class="nav nav-group-sub" >
-						<li class="nav-item"><a href="{{ route('dashboard.categories.index') }}" class="nav-link">@lang('categories.show_all_categories')</a></li>
-						<li class="nav-item"><a href="{{ route('dashboard.categories.create') }}" class="nav-link">@lang('categories.add_new_category')</a></li>
-					</ul>
-				</li>
 
 
 				<li class="nav-item nav-item-submenu">
-					<a href="#" class="nav-link {{ $brands }} "><i class="icon-git-branch "></i> <span> @lang('brands.brands') </span></a>
+					<a href="#" class="nav-link {{ $sizes }}"><i class="icon-ampersand "></i> <span> المقاسات </span></a>
 					<ul class="nav nav-group-sub" >
-						<li class="nav-item"><a href="{{ route('dashboard.brands.index') }}" class="nav-link">@lang('brands.show_all_brands')</a></li>
-						<li class="nav-item"><a href="{{ route('dashboard.brands.create') }}" class="nav-link">@lang('brands.add_new_brand')</a></li>
+						<li class="nav-item"><a href="{{ route('dashboard.sizes.index') }}" class="nav-link">
+							عرض كافه المقاسات
+						</a></li>
+						<li class="nav-item"><a href="{{ route('dashboard.sizes.create') }}" class="nav-link">
+							إضافه مقاس جديد
+						</a></li>
 					</ul>
 				</li>
-
+				<li class="nav-item nav-item-submenu">
+					<a href="#" class="nav-link {{ $colors }}"><i class="icon-ampersand "></i> <span>
+						الالوان
+					 </span></a>
+					<ul class="nav nav-group-sub" >
+						<li class="nav-item"><a href="{{ route('dashboard.colors.index') }}" class="nav-link">
+						عرض كافه الالوان
+					</a></li>
+						<li class="nav-item"><a href="{{ route('dashboard.colors.create') }}" class="nav-link">
+							إضافه لون جديد
+						</a></li>
+					</ul>
+				</li>
 				<li class="nav-item nav-item-submenu">
 					<a href="#" class="nav-link {{ $products }}"><i class="icon-ampersand "></i> <span> @lang('products.products') </span></a>
 					<ul class="nav nav-group-sub" >
@@ -216,6 +196,8 @@
 					</ul>
 				</li>	
 
+
+
 				<li class="nav-item nav-item-submenu">
 					<a href="#" class="nav-link {{ $countries }}"><i class="icon-images3"></i> <span> الدول </span></a>
 					<ul class="nav nav-group-sub" >
@@ -239,36 +221,11 @@
 						<li class="nav-item"><a href="{{ route('dashboard.cities.index') }}" class="nav-link"> عرض كافه المدن</a></li>
 						<li class="nav-item"><a href="{{ route('dashboard.cities.create') }}" class="nav-link"> إنشاء مدينه جديده</a></li>
 					</ul>
-				</li>	
-				<li class="nav-item nav-item-submenu">
-					<a href="#" class="nav-link {{ $warehouses }}"><i class="icon-images3"></i> <span> المستودعات </span></a>
-					<ul class="nav nav-group-sub" >
-						<li class="nav-item"><a href="{{ route('dashboard.warehouses.index') }}" class="nav-link"> عرض كافه المستودعات</a></li>
-						<li class="nav-item"><a href="{{ route('dashboard.warehouses.create') }}" class="nav-link"> إنشاء المستودع جديده</a></li>
-					</ul>
-				</li>		
-	
-				<li class="nav-item nav-item-submenu">
-					<a href="#" class="nav-link {{ $expenses }}"><i class="icon-images3"></i> <span> المصروفات </span></a>
-					<ul class="nav nav-group-sub" >
-						<li class="nav-item"><a href="{{ route('dashboard.expenses.index') }}" class="nav-link"> عرض كافه المصروفات</a></li>
-						<li class="nav-item"><a href="{{ route('dashboard.expenses.create') }}" class="nav-link"> إضافه مصروفات جديده</a></li>
-						
-					</ul>
-				</li>	
-				<li class="nav-item nav-item-submenu">
-					<a href="#" class="nav-link {{ $withdrawals }}"><i class="icon-images3"></i> <span> طلبات سحب الارباح </span></a>
-					<ul class="nav nav-group-sub" >
-						<li class="nav-item"><a href="{{ route('dashboard.withdrawals.index') }}" class="nav-link"> عرض كافه الطلبات</a></li>					
-					</ul>
-				</li>	
-				<li class="nav-item nav-item-submenu">
-					<a href="#" class="nav-link {{ $challenges }}"><i class="icon-images3"></i> <span> التحديات </span></a>
-					<ul class="nav nav-group-sub" >
-						<li class="nav-item"><a href="{{ route('dashboard.challenges.index') }}" class="nav-link"> عرض كافه التحديات</a></li>
-						<li class="nav-item"><a href="{{ route('dashboard.challenges.create') }}" class="nav-link"> إضافه تحدى جديد</a></li>					
-					</ul>
-				</li>					
+				</li>
+
+
+
+
 			</ul>
 		</div>
 		<!-- /main navigation -->
