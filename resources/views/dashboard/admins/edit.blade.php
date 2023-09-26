@@ -35,20 +35,7 @@
 					<fieldset class="mb-3">
 						<legend class="text-uppercase font-size-sm font-weight-bold">@lang('admins.admin_details')</legend>
 						<div class="form-group row">
-							<div class="col-md-4">
-								<div  class='mb-2' >
-									<label class="col-form-label"> نوع المستخدم  </label>
-									<select name="type" class='form-control' id="">
-										<option value="2" {{ $admin->type == 2 ? 'selected="selected"' : '' }} > مشرف </option>
-										<option value="4" {{ $admin->type == 4 ? 'selected="selected"' : '' }} > محاسب </option>
-										<option value="5" {{ $admin->type == 5 ? 'selected="selected"' : '' }} >موظضف</option>
-										<option value="6" {{ $admin->type == 6 ? 'selected="selected"' : '' }} > مندوب شحن </option>
-									</select>
-									@error('type')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
+
 							<div class="col-md-4">
 								<div  class='mb-2' >
 									<label class="col-form-label"> @lang('admins.image') </label>

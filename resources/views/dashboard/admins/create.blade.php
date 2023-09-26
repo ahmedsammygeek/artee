@@ -34,20 +34,7 @@
 					<fieldset class="mb-3">
 						<legend class="text-uppercase font-size-sm font-weight-bold">@lang('admins.admin_details')</legend>
 						<div class="form-group row">
-							<div class="col-md-4">
-								<div  class='mb-2' >
-									<label class="col-form-label"> نوع المستخدم  </label>
-									<select name="type" class='form-control' id="">
-										<option value="2"> مشرف </option>
-										<option value="4"> محاسب </option>
-										<option value="5">موظضف</option>
-										<option value="6"> مندوب شحن </option>
-									</select>
-									@error('type')
-									<p  class='text-danger' >  {{ $message }} </p>
-									@enderror
-								</div>
-							</div>
+							
 							<div class="col-md-4">
 								<div  class='mb-2' >
 									<label class="col-form-label"> @lang('admins.image') </label>

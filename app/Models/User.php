@@ -80,7 +80,7 @@ class User extends Authenticatable
         $this->email = $data['email'];
         $this->password = Hash::make($data['password']);
         $this->user_id = Auth::id();
-        $this->type = $data['type'];
+        $this->type = 2;
         return $this->save();
     }
 
@@ -89,7 +89,6 @@ class User extends Authenticatable
     {
         $this->name = $data['name'];
         $this->email = $data['email'];
-        $this->type = $data['type'];
         $this->password = isset($data['password']) ? Hash::make($data['password']) : $this->password ;
         return $this->save();
     }
