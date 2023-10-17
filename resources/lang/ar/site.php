@@ -54,7 +54,7 @@ return array (
   'No' => 'تراجع' , 
   'Address deleted successfully' => 'تم حذف العنوان بنجاح' , 
   'Address set is default successfully' => 'تم تعين العنوان كافتراضى بنجاح' , 
-  '' => '' , 
+  'All Rights Reserved' => 'جميع الحقوق محفوظه' , 
   '' => '' , 
   '' => '' , 
   '' => '' , 

@@ -55,7 +55,7 @@ return array (
   'No' => 'No' , 
   'Address deleted successfully' => 'Address deleted successfully' , 
   'Address set is default successfully' => 'Address set is default successfully' , 
-  '' => '' , 
+  'All Rights Reserved' => 'All Rights Reserved' , 
   '' => '' , 
   '' => '' , 
   '' => '' , 

@@ -92,7 +92,7 @@ Route::group([
     Route::post('/register' , [RegisterController::class, 'register'] )->name('register.post');
     Route::get('/verify' , [VerifyEmailController::class, 'form'] )->name('verify.form');
     Route::post('/verify' , [VerifyEmailController::class, 'verify'] )->name('verify.post');
-
+    Route::get('pages/{page}' , [SiteController::class , 'page'] )->name('pages.show');
 
 
     Route::group(['middleware' => 'auth'], function() {

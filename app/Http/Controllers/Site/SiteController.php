@@ -13,6 +13,7 @@ use App\Jobs\IncreasProductSalesCountJob;
 use App\Jobs\IncreasProductViewsCountJob;
 
 use App\Models\Slide;
+use App\Models\Page;
 class SiteController extends Controller
 {
 
@@ -33,6 +34,7 @@ class SiteController extends Controller
     {
         return view('site.page' , compact('page') );
     }
+
 
     /**
      * Show the form for creating a new resource.

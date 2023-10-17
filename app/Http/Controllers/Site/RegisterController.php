@@ -32,7 +32,8 @@ class RegisterController extends Controller
         $user->save();
 
         $code = new EmailVerificationCode;
-        $code->code = substr(str_shuffle(time()),0 , 4) ;
+        // $code->code = substr(str_shuffle(time()),0 , 4) ;
+        $code->code = 1234 ;
         $code->email = $user->email;
         $code->save();
         return redirect(url('verify?email='.$user->email ));
