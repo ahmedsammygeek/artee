@@ -4,22 +4,6 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Page;
-use App\Models\Slide;
-use App\Models\Product;
-use App\Models\Category;
-use App\Models\Governorate;
-use App\Models\User;
-use App\Models\Cart;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\City;
-use App\Models\Complain;
-use Auth;
-use Str;
-use Storage;
-use Hash;
-use Zip;
 use App\Http\Requests\Site\RegisterRequest;
 use App\Http\Requests\Site\SoreOrderRequest;
 use App\Http\Requests\Site\LoginRequest;
@@ -27,18 +11,16 @@ use App\Http\Requests\Site\StoreComplainRequest;
 use App\Jobs\SendVerificationCodeToViaPhoneNumberJob;
 use App\Jobs\IncreasProductSalesCountJob;
 use App\Jobs\IncreasProductViewsCountJob;
+
+use App\Models\Slide;
 class SiteController extends Controller
 {
 
 
     public function index() {
-        $slides = Slide::where('active' , 1)->latest()->get();
-        $latest_products = Product::with(['category' , 'images'])->latest()->take(12)->get();
-        $best_selling_products = Product::orderBy('sales_count' , 'DESC' )->take(6)->get();
-        $categories = Category::where('show_after_slider' , 1 )->latest()->get();
-        $home_categories = Category::where('show_in_home_page' , 1 )->latest()->get();
-        $slider_categories = Category::where('show_after_slider' , 1 )->latest()->get();
-        return view('site.index' , compact('slides' , 'slider_categories' , 'home_categories' , 'categories' , 'latest_products' , 'best_selling_products'));
+        $slides = Slide::where('is_active' , 1 )->latest()->get();
+
+        return view('site.index' , compact('slides') );
     }
 
 

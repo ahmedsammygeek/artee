@@ -1,164 +1,146 @@
  @php
  $lang = LaravelLocalization::getCurrentLocale() ;
  @endphp
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+    <div class="container-fluid">
+      <a href="{{ url('/') }}" class="navbar-brand">
+        <img src="{{ asset('site_assets/'.$dir.'/images/logo.png') }}" alt="Artee" class="brand-image">
+      </a>
 
+      <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
- <header class="section-header">
-     <nav class="navbar d-none d-md-flex p-md-0 navbar-expand-sm navbar-light border-bottom">
-        <div class="container">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTop4">
-            <ul class="navbar-nav mr-auto">
-                <li><a href="#" class="nav-link"> المساعده </a></li>
-                <li><a href="#" class="nav-link"> المساعده </a></li>
-            </ul>
-            <ul class="navbar-nav">
-                <li>
-                    الشحن الى مصر
+      <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+          </li>
+        </ul>
 
-{{--                     @foreach ($data['countries'] as $country)
-                        <a href="#" class="nav-link"> 
-                            <img src="{{ Storage::url('countries/'.$country->image) }}" height="16"> {{ $country->name }}   الشحن الى 
-                        </a>
-                        @endforeach --}}
-                    </li>
-                </ul> <!-- list-inline //  -->
-            </div> <!-- navbar-collapse .// -->
-        </div> <!-- container //  -->
-    </nav>
+        <!-- SEARCH FORM -->
+        <form class="form-inline ml-0 ml-md-3">
+          <div class="input-group input-group-sm">
+            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+              <button class="btn btn-navbar" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
 
-    <section class="header-main border-bottom">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-xl-2 col-lg-3 col-md-12">
-                    <a href="{{ url('/') }}" class="brand-wrap">
-                        <img style='max-height: 57px; !important' class="logo" src="{{ Storage::url('site_assets/images/souq-01-final.svg') }}">
-                    </a> 
+      <!-- Right navbar links -->
+      <ul class="list-group order-1 order-md-3 navbar-nav navbar-no-expand ml-auto right-nav">
+
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-bell"></i>
+            <span class="badge badge-danger navbar-badge">15</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+            <a href="#" class="list-group-item list-group-item-action active">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="text-sm mb-1 text-bold">List group item heading</h5>
+                <small>3 days ago</small>
+              </div>
+              <small>And some small print.</small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="text-sm mb-1 text-bold">List group item heading</h5>
+                <small class="text-muted">3 days ago</small>
+              </div>
+              <small class="text-muted">And some muted small print.</small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="text-sm mb-1 text-bold">List group item heading</h5>
+                <small class="text-muted">3 days ago</small>
+              </div>
+              <small class="text-muted">And some muted small print.</small>
+            </a>
+
+          </div>
+        </li>
+
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item">
+          <a class="nav-link" href="Card.html">
+            <i class="fas fa-shopping-cart"></i>
+          </a>
+        </li>
+
+        <li class="nav-item dropdown header-profile">
+          <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            class="nav-link dropdown-toggle fa">
+            <div class="image">
+              <img src="img/user8-128x128.jpg" class="img-circle elevation-1 img-size-40" alt="User Image">
+            </div>
+          </a>
+          <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow p-0">
+            <li>
+              <a href="Profile.html" class="user-panel d-flex p-2 bg-gray-light">
+                <div class="image p-0">
+                  <img class="img-circle elevation-1" alt="User Image" src="img/user2-160x160.jpg">
                 </div>
-                <div class="col-xl-6 col-lg-5 col-md-6">
-                    <form action="{{ route('search') }}" class="search-header">
-                        <div class="input-group w-100">
-                            <select class="custom-select border-right"  name="category_name">
-                                <option value="all"> جميع التصنيفات </option>
-                                @foreach ($data['categories'] as $category)
-                                <option value="{{ $category->id }}">  {{ $category->name }}  </option>
-                                @endforeach
-                            </select>
-                            <input type="text" name='search' class="form-control" placeholder="ابحث الان عن المنتجات داخل الموقع" >
-
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="fa fa-search"></i> @lang('site.search')
-                                </button>
-                            </div>
-                        </div>
-                    </form> <!-- search-wrap .end// -->
-                </div> <!-- col.// -->
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <div class="widgets-wrap float-md-right">
-
-                        @if (!Auth::check())
-                        <div class="widget-header mr-3">
-                            <a href="{{ route('login') }}" class="widget-view">
-                                <div class="icon-area">
-                                    <i class="fa fa-user"></i>
-
-                                </div>
-                                <small class="text"> تسجيل الدخول </small>
-                            </a>
-                        </div>
-                        <div class="widget-header mr-3">
-                            <a href="{{ route('register') }}" class="widget-view">
-                                <div class="icon-area">
-                                    <i class="fa fa-user"></i>
-                                </div>
-                                <small class="text"> عضو جديد ؟ </small>
-                            </a>
-                        </div>
-                        @endif
-
-                        @if (Auth::check())
-                        <div class="widget-header mr-3">
-                            <a href="{{ route('site.account') }}" class="widget-view">
-                                <div class="icon-area">
-                                    <i class="fa fa-user"></i>
-                                   
-                                </div>
-                                <small class="text"> @lang('site.account') </small>
-                            </a>
-                        </div>
-                        @endif
-
-                        <div class="widget-header">
-                            <a href="{{ route('cart') }}" class="widget-view">
-                                <div class="icon-area">
-                                    <i class="fa fa-shopping-cart"></i>
-                                </div>
-                                <small class="text"> @lang('site.cart') </small>
-                            </a>
-                        </div>
-
-
-                        @if (Auth::check())
-                        <div class="widget-header">
-                            <a href="{{ route('user.logout') }}" class="widget-view">
-                                <div class="icon-area">
-                                 <i class="fa fa-sign-out-alt"></i>
-                             </div>
-                             <small class="text"> @lang('site.logout') </small>
-                         </a>
-                     </div>
-                     @endif 
-
-                 </div> <!-- widgets-wrap.// -->
-             </div> <!-- col.// -->
-         </div> <!-- row.// -->
-     </div> <!-- container.// -->
- </section> <!-- header-main .// -->
-
-
-
- <nav class="navbar navbar-main navbar-expand-lg border-bottom">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav" aria-controls="main_nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="main_nav">
-            <ul class="navbar-nav">
-                @foreach ($data['categories'] as $category)
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="{{ route('category.products' , $category ) }}"> {{ $category->name }} </a>
-                    <div class="dropdown-menu dropdown-large" style="width: 900px;" >
-                        <nav class="row">
-                            @foreach ($category->children as $child)
-                            <div class="col-3">
-                                <h5> <a  href="{{ route('category.products' , $child ) }}"> {{ $child->name }} </a> </h5>
-                               @foreach ($child->children as $sub_child)
-                                   <a style='font-size:16px;font-weight: normal!important;' href="{{ route('category.products' , $sub_child ) }}">{{ $sub_child->name }}</a>
-                               @endforeach
-                            </div>
-                            @endforeach
-                        </nav> <!--  row end .// -->
-                    </div> <!--  dropdown-menu dropdown-large end.// -->
-                </li>
-                @endforeach
-               
+                <div class="info">
+                  <h5 href="#" class="d-block text-sm">Alexander Pierce</h5>
+                </div>
+              </a>
+            </li>
+            <ul class="nav nav-pills flex-column">
+              <li class="nav-item">
+                <a href="Wishlist.html" class="nav-link">
+                  <i class="far fa-heart"></i> Wishlist
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="Orders.html" class="nav-link">
+                  <i class="far fa-paper-plane"></i> My Orders
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-map-marker-alt"></i> My Addresses
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../Ar/index.html" class="nav-link">
+                  <i class="fas fa-language"></i> Arabic
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="Followers.html" class="nav-link">
+                  <i class="far fa-user"></i> My Followers
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="Diamond.html" class="nav-link">
+                  <i class="far fa-gem"></i> My Diamonds
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-cog"></i> Settings
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-sign-out-alt"></i> Log out
+                </a>
+              </li>
             </ul>
-            <ul class="navbar-nav ml-md-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('complains') }}"> الشكاوى  و الاقتراحات </a>
-                </li>
-                @if ($lang == 'ar' )
-                {{-- <a class="nav-link" href="{{ LaravelLocalization::getLocalizedURL('en') }}"> English </a> --}}
-                @else
-                <a class="nav-link" href="{{ LaravelLocalization::getLocalizedURL('ar') }}"> اللغه العربيه </a>
-                @endif
-            </ul>
-        </div> <!-- collapse .// -->
-    </div> <!-- container .// -->
-</nav>
 
-</header> <!-- section-header.// -->
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- /.navbar -->

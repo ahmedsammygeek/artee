@@ -33,13 +33,12 @@ use App\Http\Controllers\Dashboard\SizeController;
 use App\Http\Controllers\Dashboard\ColorController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\UserDesginController;
-
-use App\Http\Controllers\Site\ContactUsController;
-use App\Http\Controllers\Site\AccountController;
 use App\Http\Controllers\Site\SiteController;
-use App\Http\Controllers\Site\GoogleAuthController;
-use App\Http\Controllers\Site\FacebookAuthController;
-use App\Http\Controllers\Site\PhoneVerificationController;
+use App\Http\Controllers\Site\LoginController;
+use App\Http\Controllers\Site\RegisterController;
+use App\Http\Controllers\Site\VerifyEmailController;
+use App\Http\Controllers\Site\ProfileController as UserProfileController ;
+
 
 use App\Http\Controllers\Testcontroller;
 Route::get('/test' , [TestController::class , 'index'] );
@@ -51,8 +50,6 @@ Route::group([
 
     Route::get('/Dashboard/login' , [AuthController::class , 'form'])->name('dashboard.login_form');
     Route::post('/Dashboard/login' , [AuthController::class , 'login'])->name('dashboard.login');
-
-    require __DIR__.'/auth.php';
 
     Route::group(['prefix' => 'Dashboard' , 'as' => 'dashboard.' , 'middleware' => ['admin'] ], function() {
         Route::get('/',  [DashboardController::class , 'index'] )->name('index');
@@ -88,61 +85,18 @@ Route::group([
 
         Route::post('/get_new_varition_color_row' , [AjaxController::class , 'get_new_varition_color_row'] )->name('get_new_varition_color_row');
     });
-    Route::get('/' , function(){
-        return 'website under construction';
+    Route::get('/' , [SiteController::class, 'index'] );
+    Route::get('/login' , [LoginController::class, 'form'] )->name('login.form');
+    Route::post('/login' , [LoginController::class, 'login'] )->name('login.post');
+    Route::get('/register' , [RegisterController::class, 'form'] )->name('register.form');
+    Route::post('/register' , [RegisterController::class, 'register'] )->name('register.post');
+    Route::get('/verify' , [VerifyEmailController::class, 'form'] )->name('verify.form');
+    Route::post('/verify' , [VerifyEmailController::class, 'verify'] )->name('verify.post');
+
+
+
+    Route::group(['middleware' => 'auth'], function() {
+        Route::get('/profile' , [UserProfileController::class , 'index'] )->name('profile.index');
     });
-
-// Route::get('verify/phone' , [PhoneVerificationController::class , 'index' ] )->name('site.verify_phone');
-// Route::post('verify/phone' , [PhoneVerificationController::class , 'store' ] )->name('site.verify_phone.store');
-// Route::post('/register' , [SiteController::class , 'store_register'])->name('site.register');
-// Route::get('/google' , [GoogleAuthController::class , 'index'] )->name('google');
-// Route::get('/google/callable' , [GoogleAuthController::class , 'store'] );
-// Route::get('/facebook' , [FacebookAuthController::class , 'index'] );
-// Route::get('/facebook/callable' , [FacebookAuthController::class , 'store'] );
-// Route::get('logout' , [AccountController::class , 'logout'])->name('user.logout');
-// Route::get('/login' , [SiteController::class , 'login'] )->name('login');
-// Route::post('login' , [SiteController::class , 'login_system'] )->name('login_system');
-// Route::get('/register' , [SiteController::class , 'register'] )->name('register');
-// Route::get('/phone' , [SiteController::class , 'phone'] )->name('site.phone');
-// Route::patch('/phone' , [SiteController::class , 'update_phone'] )->name('site.phone.update');
-
-// Route::group(['middleware' => 'verify_phone'], function() {
-//     Route::get('/' , [SiteController::class , 'index'] )->name('site.index');
-//     Route::get('/products/{product}' , [SiteController::class , 'product'] )->name('site.products.show');
-//     Route::get('/products' , [SiteController::class , 'products'] )->name('site.products.index');
-//     Route::get('/category' , [SiteController::class , 'category'] )->name('site.category');
-//     Route::get('pages/{page}' , [SiteController::class , 'page'])->name('pages.show');
-//     Route::get('/categories/{category}/products' , [SiteController::class , 'category_products'])->name('category.products');
-
-//     Route::get('search' , [SiteController::class , 'search'])->name('search');
-//     Route::get('/cart' , [SiteController::class , 'cart'])->name('cart');
-
-
-//     Route::get('products/{product}/images/download' , [SiteController::class , 'downloadProductImages'] )->name('product.images.download');
-
-//     Route::get('/complains' , [SiteController::class , 'complains'])->name('complains');
-//     Route::post('/complains' , [SiteController::class , 'store_complains'])->name('complains.store');
-//     Route::group(['middleware' => 'auth'], function() {
-//         Route::get('/profile' , [AccountController::class , 'profile'] )->name('site.account');
-//         Route::patch('/profile' , [AccountController::class , 'update_profile'] )->name('site.account.update');
-//         Route::get('/checkout' , [SiteController::class , 'checkout'] )->name('checkout.index');
-//         Route::post('/checkout' , [SiteController::class , 'save_order'] )->name('checkout.save');
-
-    Route::get('orders' , [AccountController::class , 'orders'] )->name('site.orders.index');
-//         Route::get('orders/{order:number}/returns/create' , [AccountController::class , 'create_return'] )->name('site.orders.returns.create');
-//         Route::post('orders/{order:number}/returns' , [AccountController::class , 'store_return'] )->name('site.orders.returns.store');
-//         Route::get('wishlist' , [AccountController::class , 'wishlist'] )->name('site.wishlist');
-//         Route::get('incomes' , [AccountController::class , 'incomes'])->name('site.incomes');
-//         Route::get('statistics' , [AccountController::class , 'statistics'])->name('site.statistics');
-//         Route::get('withdrawals/create' , [AccountController::class , 'create_withdrawal'])->name('site.withdrawals.create');
-
-//         Route::post('/withdrawals' , [AccountController::class , 'store_withdrawal'])->name('site.withdrawals.store');
-
-//         Route::get('withdrawals' , [AccountController::class , 'withdrawals'])->name('site.withdrawals');
-//         Route::get('withdrawals/{withdrawal}' , [AccountController::class , 'withdrawal'])->name('site.withdrawals.show');
-//         Route::get('/wallet' , [AccountController::class , 'wallet'] )->name('site.wallet');
-//     });
-
-// });
 
 });

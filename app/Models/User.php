@@ -15,11 +15,6 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     const ADMIN = 2;
     const USER = 1;
-    const MARKETER = 3;
-    const ACCOUNTANT = 4;
-    const EMPLOYEE = 5;
-    const SHIPPINGREPRESENTATIVE = 6;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -99,7 +94,7 @@ class User extends Authenticatable
         if ($value) 
             return $value;
         
-        return 'user.jpeg';
+        return 'user-default.png';
     }
 
 

@@ -15,16 +15,22 @@ class Testcontroller extends Controller
      */
     public function index()
     {
-        $products = Product::doesntHave('variations')->get();
 
-        foreach ($products as $product) {
-            $variation = new Variation;
-            $variation->product_id = $product->id;
-            $variation->user_id = Auth::id();
-            $variation->type = 'one_size';
-            $variation->barcode = $product->barcode;
-            $variation->save();
-        }
+        dd(Auth::check());
+        // $time = time();
+
+        dd('done');
+
+        // $products = Product::doesntHave('variations')->get();
+
+        // foreach ($products as $product) {
+        //     $variation = new Variation;
+        //     $variation->product_id = $product->id;
+        //     $variation->user_id = Auth::id();
+        //     $variation->type = 'one_size';
+        //     $variation->barcode = $product->barcode;
+        //     $variation->save();
+        // }
     }
 
     /**
