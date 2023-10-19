@@ -93,6 +93,7 @@ Route::group([
     Route::get('/verify' , [VerifyEmailController::class, 'form'] )->name('verify.form');
     Route::post('/verify' , [VerifyEmailController::class, 'verify'] )->name('verify.post');
     Route::get('pages/{page}' , [SiteController::class , 'page'] )->name('pages.show');
+    Route::get('users/{user:username}' , [SiteController::class , 'user'] )->name('users.show');
 
 
     Route::group(['middleware' => 'auth'], function() {

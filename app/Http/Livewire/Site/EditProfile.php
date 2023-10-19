@@ -14,6 +14,7 @@ class EditProfile extends Component
     public $phone;
     public $email;
     public $bio;
+    public $username;
 
     protected function rules()
     {
@@ -21,6 +22,7 @@ class EditProfile extends Component
             'first_name' => 'required' , 
             'last_name' => 'required' , 
             'phone' => 'required|unique:users,phone,'.Auth::id() , 
+            'username' => 'required|unique:users,username,'.Auth::id() , 
             'email' => 'required|email|unique:users,email,'.Auth::id() , 
             'bio' => 'nullable' , 
 
@@ -34,6 +36,7 @@ class EditProfile extends Component
         $this->phone = $this->user->phone;
         $this->email = $this->user->email;
         $this->bio = $this->user->bio;
+        $this->username = $this->user->username;
     }
 
 
@@ -46,6 +49,7 @@ class EditProfile extends Component
         $this->user->phone = $this->phone;
         $this->user->email = $this->email;
         $this->user->bio = $this->bio;
+        $this->user->username = trim(str_replace(' ', '', $this->username));
         $this->user->save();
 
         $this->alert('success' , trans('site.Profile updated successfully') );

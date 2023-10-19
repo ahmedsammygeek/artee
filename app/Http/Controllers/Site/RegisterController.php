@@ -26,11 +26,11 @@ class RegisterController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->password = Hash::make($request->password);
+        $user->type = 1;
         if ($request->hasFile('image')) {
             $user->image = basename($request->file('image')->store('users'));
         }
         $user->save();
-
         $code = new EmailVerificationCode;
         // $code->code = substr(str_shuffle(time()),0 , 4) ;
         $code->code = 1234 ;

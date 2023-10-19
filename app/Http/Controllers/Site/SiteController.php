@@ -14,14 +14,15 @@ use App\Jobs\IncreasProductViewsCountJob;
 
 use App\Models\Slide;
 use App\Models\Page;
+use App\Models\User;
 class SiteController extends Controller
 {
 
 
     public function index() {
         $slides = Slide::where('is_active' , 1 )->latest()->get();
-
-        return view('site.index' , compact('slides') );
+        $recomanded_users = User::where('type' , 1 )->orderByRaw("RAND()")->take(8)->get();
+        return view('site.index' , compact('slides' , 'recomanded_users' ) );
     }
 
 
@@ -33,6 +34,12 @@ class SiteController extends Controller
     public function page(Page $page)
     {
         return view('site.page' , compact('page') );
+    }
+
+
+    public function user(User $user)
+    {
+        return view('site.designer' , compact('user') );
     }
 
 
