@@ -36,12 +36,16 @@ class SiteController extends Controller
         return view('site.page' , compact('page') );
     }
 
-
     public function user(User $user)
     {
         return view('site.designer' , compact('user') );
     }
 
+
+    public function contact()
+    {
+        return view('site.contact');
+    }
 
     /**
      * Show the form for creating a new resource.

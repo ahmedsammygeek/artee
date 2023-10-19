@@ -8,7 +8,7 @@ if ($lang == 'ar') {
 @endphp
 <div class="section footer-sidebar">
   <ul class="footer-sidebar-list">
-    <li><a href="{{ url('contact') }}">Contact Us</a></li>
+    <li><a href="{{ url('contact') }}"> @lang('site.Contact Us') </a></li>
     @foreach ($data['pages'] as $page)
     <li><a href="{{ route('pages.show' , ['page' => $page->id.'-'.$page->title ] ) }}"> {{ $page->title }} </a></li>
     @endforeach

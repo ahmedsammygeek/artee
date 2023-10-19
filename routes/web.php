@@ -94,6 +94,7 @@ Route::group([
     Route::post('/verify' , [VerifyEmailController::class, 'verify'] )->name('verify.post');
     Route::get('pages/{page}' , [SiteController::class , 'page'] )->name('pages.show');
     Route::get('users/{user:username}' , [SiteController::class , 'user'] )->name('users.show');
+    Route::get('contact' , [SiteController::class , 'contact']);
 
 
     Route::group(['middleware' => 'auth'], function() {
