@@ -27,7 +27,7 @@
             @foreach ($products as $product)
             <li>
               <div class="product-container">
-                <a href="{{ $product->id }}" class="image-container" data-image="{{ Storage::url('products/'.$product->front_image) }}">
+                <a href="{{ $product->url() }}" class="image-container" data-image="{{ Storage::url('products/'.$product->front_image) }}">
                   <div class="card-front"><img src="{{ Storage::url('products/'.$product->front_image) }}" /></div>
                   <div class="card-back"><img src="{{ Storage::url('products/'.$product->back_image) }}" /></div>
                 </a>

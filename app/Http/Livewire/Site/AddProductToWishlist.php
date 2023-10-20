@@ -26,21 +26,27 @@ class AddProductToWishlist extends Component
 
     public function updatedIsInWishlist()
     {
-        $wishlist = Wishlist::where([
-            ['user_id' , '=' , Auth::id() ] , 
-            ['product_id' , '=' , $this->product->id ] , 
-        ])->first();
-        if ($wishlist) {
-            $wishlist->delete();
-            $this->alert('success' , trans('site.product deleted to wishlist successfully') );
+        if (Auth::check()) {
+            $wishlist = Wishlist::where([
+                ['user_id' , '=' , Auth::id() ] , 
+                ['product_id' , '=' , $this->product->id ] , 
+            ])->first();
+            if ($wishlist) {
+                $wishlist->delete();
+                $this->alert('success' , trans('site.product deleted to wishlist successfully') );
 
+            } else {
+                $wishlist = new Wishlist;
+                $wishlist->user_id = Auth::id();
+                $wishlist->product_id = $this->product->id;
+                $wishlist->save();
+                $this->alert('success' , trans('site.product added to wishlist successfully') );
+            }
         } else {
-            $wishlist = new Wishlist;
-            $wishlist->user_id = Auth::id();
-            $wishlist->product_id = $this->product->id;
-            $wishlist->save();
-            $this->alert('success' , trans('site.product added to wishlist successfully') );
+            $this->is_in_wishlist = false;
+            $this->alert('error' , trans('site.you need to login first'));
         }
+        
         
     }
 

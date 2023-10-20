@@ -96,7 +96,10 @@ Route::group([
     Route::get('users/{user:username}' , [SiteController::class , 'user'] )->name('users.show');
     Route::get('contact' , [SiteController::class , 'contact'])->name('contact');
     Route::get('search' , [SiteController::class , 'search'])->name('search');
-    Route::get('products/{product}' , [SiteController::class , 'product'])->name('product.show');
+    Route::get('products/{product}' , [SiteController::class , 'product'])->name('products.show');
+    Route::get('/custom-designs' , [SiteController::class , 'custom_designs'])->name('custom-designs');
+    Route::get('/explore' , [SiteController::class , 'explore'])->name('explore');
+    Route::get('/products' , [SiteController::class , 'products'])->name('products');
 
     Route::group(['middleware' => 'auth'], function() {
         Route::get('/profile' , [UserProfileController::class , 'index'] )->name('profile.index');

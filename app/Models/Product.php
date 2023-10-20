@@ -33,6 +33,10 @@ class Product extends Model
     }
 
 
+    public function url()
+    {
+        return route('products.show' , $this->id.'-'.$this->name );
+    }
    
 
 

@@ -74,7 +74,22 @@ class SiteController extends Controller
     {
         dispatch(new IncreasProductViewsCountJob($product));
         $product->load(['images']);
-        return view('site.product' , compact('product' ));
+        $products = Product::with(['variations.color'])->inRandomOrder()->limit(9)->get();
+        return view('site.product' , compact('product' , 'products' ));
+    }
+
+
+    public function custom_designs()
+    {
+        return view('site.custom_designs');
+    }
+
+
+    public function explore()
+    {
+        $products = Product::with(['variations.color'])->latest()->take(15)->get();
+        $users = User::latest()->take(15)->get();
+        return view('site.explore' , compact('products'  , 'users' ));
     }
 
     /**

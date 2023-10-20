@@ -112,4 +112,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(User::class , 'user_id');
     }
+
+    public function url()
+    {
+        return route('users.show' , $this->username );
+    }
 }
