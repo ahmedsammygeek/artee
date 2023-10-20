@@ -15,6 +15,7 @@ use App\Jobs\IncreasProductViewsCountJob;
 use App\Models\Slide;
 use App\Models\Page;
 use App\Models\User;
+use App\Models\Product;
 class SiteController extends Controller
 {
 
@@ -47,6 +48,23 @@ class SiteController extends Controller
         return view('site.contact');
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $products = Product::with(['variations' , 'variations.color' ])->where(function($query) use($search){
+            $query
+            ->where('name->ar' , 'LIKE' , '%'.$search.'%' )
+            ->orWhere('name->en' , 'LIKE' , '%'.$search.'%' )
+            ->orWhere('description->en' , 'LIKE' , '%'.$search.'%' )
+            ->orWhere('description->en' , 'LIKE' , '%'.$search.'%' );
+        })->paginate(30);
+
+        return view('site.search' , compact('search' , 'products') );
+    }
+
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -55,9 +73,8 @@ class SiteController extends Controller
     public function product(Product $product)
     {
         dispatch(new IncreasProductViewsCountJob($product));
-        $similar_products = Product::where('category_id' , $product->category_id )->inRandomOrder()->take(3)->get();
-        $best_selling_products = Product::orderBy('sales_count' , 'DESC' )->take(6)->get();
-        return view('site.product' , compact('product' , 'similar_products' , 'best_selling_products'));
+        $product->load(['images']);
+        return view('site.product' , compact('product' ));
     }
 
     /**
@@ -127,18 +144,6 @@ class SiteController extends Controller
     {
         $products = Product::where('active' , 1)->where('category_id' , $category->id )->latest()->paginate(20);
         return view('site.category_products' , compact('category' , 'products') );
-    }
-
-    public function search(Request $request)
-    {
-        $products = Product::where(function($query) use($request) {
-            $query->where('name->en' , 'LIKE' , '%'.$request->search.'%' )->orWhere('name->ar' , 'LIKE' , '%'.$request->search.'%' );
-        });
-        if ($request->category_name != 'all' ) {
-            $products->where('category_id' , $request->category_name );
-        }
-        $products = $products->latest()->get();
-        return view('site.search' , compact('products'));
     }
 
     public function store_register(RegisterRequest $request)

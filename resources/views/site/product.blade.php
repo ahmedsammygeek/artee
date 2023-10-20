@@ -1,159 +1,335 @@
 @extends('site.layouts.master')
 
 @section('page_content')
-<section class="py-3 " style='background-color: #FAF55FF !important;' >
-  <div class="container">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ url('/') }}">الرئيسيه</a></li>
-      <li class="breadcrumb-item"><a href="#">{{ $product->category?->name }}</a></li>
-      <li class="breadcrumb-item active" aria-current="page">{{ $product->name }}</li>
-    </ol>
-  </div>
-</section>
+  <div class="content-wrapper pt-3">
+    <!-- Main content -->
+    <section class="content">
+      
+      
 
-<!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-content bg-white padding-y">
-  <div class="container">
+      <!-- Default box -->
+      <div class="card-solid">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <div class="row">
+                <div class="col-3 product-image-thumbs flex-column">
+                   <div class="product-image-thumb "><img src="{{ Storage::url('products/'.$product->front_image) }}" alt="Product Image"></div>
+                  @foreach ($product->images as $product_image)
+                    <div class="product-image-thumb "><img src="{{ Storage::url('products/'.$product_image->image) }}" alt="Product Image"></div>
+                  @endforeach
+                </div>
 
-    <!-- ============================ ITEM DETAIL ======================== -->
-    <div class="row">
-      <aside class="col-md-6">
-        <div class="card">
-          @livewire('site.product-gallery' , ['product' => $product ] )
-          <a href='{{ route('product.images.download' , $product ) }}' class='btn btn-primary' > <i class="fa fa-download"></i> تحميل جميع صور المنتج على جهازك </a>
-        </div> <!-- card.// -->
-      </aside>
-      <main class="col-md-6">
-        <article class="product-info-aside">
+                <div class="col-9 product-image-container">
+                  <div class="flip-shirt" data-back="{{ Storage::url('products/'.$product->back_image) }}" data-front="{{ Storage::url('products/'.$product->back_image) }}"><i class="fa fa-rotate-right"></i></div>
+                  <img src="{{ Storage::url('products/'.$product->front_image) }}" class="product-image" alt="Product Image">
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6  pl-3">
+              @livewire('site.add-product-to-wishlist' , ['product' => $product ] )
+              <h3 class="mb-3"> {{ $product->name }} </h3>
+              <div class="starrating risingstar d-inline-flex flex-row-reverse">
+                <input type="radio" id="star5" name="rating" value="5" /><label class="fa fa-star" for="star5" title="5 star"></label>
+                <input type="radio" id="star4" name="rating" value="4" /><label class="fa fa-star" for="star4" title="4 star"></label>
+                <input type="radio" id="star3" name="rating" value="3" /><label class="fa fa-star" for="star3" title="3 star"></label>
+                <input type="radio" id="star2" name="rating" value="2" /><label class="fa fa-star" for="star2" title="2 star"></label>
+                <input type="radio" id="star1" name="rating" value="1" /><label class="fa fa-star" for="star1" title="1 star"></label>
+              </div>
+              <span class="px-2">(2 Review)</span>
+            
+              <p class="product-page-info">
+                {!! $product->description !!}
+              </p>
 
-          <h2 class="title mt-3" style='color: #6B14BE' > {{ $product->name }} </h2>
+              <div class="ProductPrice mb-3">
+                <span class="price mr-3"> 400 @lang('site.SAR') </span>
+                <div class="diamondPriceContainer bg-primary-gridant d-inline-block" style="cursor:default">
+                  <i class="far fa-gem mr-1"></i>
+                  400 Diamond
+                </div>
+              </div>
+              <!-- <hr> -->
 
-          <div class="rating-wrap my-3">
-           <ul class="rating-stars">
-            <li style="width:80%" class="stars-active"> 
-             <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-             <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-             <i class="fa fa-star"></i> 
-           </li>
-           <li>
-             <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-             <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-             <i class="fa fa-star"></i> 
-           </li>
-         </ul>
-         <small class="label-rating text-muted">132 تقييم</small>
-         <small class="label-rating text-success"> <i class="fa fa-clipboard-check"></i> 154 تم شرائه </small>
-       </div> <!-- rating-wrap.// -->
-       @livewire('site.product-selector' , ['product' => $product ] )
-     </article> <!-- product-info-aside .// -->
-   </main> <!-- col.// -->
- </div> <!-- row.// -->
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn text-center p-2 active">
+                  <input type="radio" name="color_option" id="color_option_a1" autocomplete="off" checked>
+                  <i class="fas fa-circle fa-1x" style="color: gray;"></i>
+                </label>
+                <label class="btn text-center p-2">
+                  <input type="radio" name="color_option" id="color_option_a2" autocomplete="off">
+                  <i class="fas fa-circle fa-1x" style="color: blue;"></i>
+                </label>
+                <label class="btn text-center p-2">
+                  <input type="radio" name="color_option" id="color_option_a3" autocomplete="off">
+                  <i class="fas fa-circle fa-1x" style="color: Purple;"></i>
+                </label>
+                <label class="btn text-center p-2">
+                  <input type="radio" name="color_option" id="color_option_a3" autocomplete="off">
+                  <i class="fas fa-circle fa-1x" style="color: red;"></i>
+                </label>
+                <label class="btn text-center p-2">
+                  <input type="radio" name="color_option" id="color_option_a3" autocomplete="off">
+                  <i class="fas fa-circle fa-1x" style="color: #000;"></i>
+                </label>
+                <label class="btn text-center p-2">
+                  <input type="radio" name="color_option" id="color_option_a3" autocomplete="off">
+                  <i class="fas fa-circle fa-1x" style="color: darkred;"></i>
+                </label>
+              </div>
 
- <!-- ================ ITEM DETAIL END .// ================= -->
+              <div class="select">
+                <select> 
+                  <option>Select Size</option>
+                  <option>Small</option>
+                  <option>Large</option>
+                  <option>X-Large</option>
+                  <option>2X-Large</option>
+                </select>
+              </div>
 
+              <a href="custom-designs.html" class="btn btn-primary p-3 ml-3 bg-primary-gridant">
+                <i class="fas fa-cart-plus fa-lg mr-2"></i>
+                custom-design
+              </a>
 
-</div> <!-- container .//  -->
-</section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
+            </div>
+          </div>
+          
+          
+          <!-------------------------- Products List --------------------------->
+          <div class="mt-4">
+              <div class="section relatedProducts Products-list">
+                <div class="title d-flex justify-content-between">
+                  <h3 class="mb-2">Related Products</h5>
+                </div>                
 
-<!-- ========================= SECTION  ========================= -->
-<section class="section-name padding-y bg">
-  <div class="container">
+                
+                <ul class="users-list clearfix">
 
-    <div class="row">
-     <div class="col-md-8">
-      <h5 class="title-description"> تفاصيل المنتج </h5>
-      <p>
-        {!! $product->description !!}
-      </p>
+                  <li>
+                    <div class="product-container">
+                      <a href="Product-details.html" class="image-container" data-image="img/front-1.JPG">
 
+                        <div class="card-front"><img src="img/front-1.JPG" /></div>
+                        <div class="card-back"><img src="img/back-1.JPG" /></div>
+                      </a>
 
-    </div> <!-- col.// -->
-
-    <aside class="col-md-4">
-
-      <div class="box">
-
-        <h5 class="title-description"> @lang('site.similar_products') </h5>
-        @foreach ($similar_products as $similar_product)
-        <div class="col-lg-12">
-          <figure class="itemside mb-4">
-            <a href="{{ $similar_product->url() }}" class="aside">
-              <img src="{{ Storage::url('products/'.$similar_product->image) }}" class="img-sm img-thumbnail">
-            </a>
-            <figcaption class="info">
-              <a href="{{ $similar_product->url() }}" class="title">{{ $similar_product->name }}</a>
-              <span class="text-muted">{{ $similar_product->price }} جنيه</span>
-              <div class="rating-wrap">
-                <ul class="rating-stars">
-                  <li class="stars-active" style="width:80%;">
-                    <img src="{{ Storage::url('site_assets/images/misc/stars-active.svg') }}" alt="">
+                      <ul class="color-list">
+                        <li class="color-item" style="background:darkred" data-image="img/color-1.jpg"></li>
+                        <li class="color-item" style="background:darkblue" data-image="img/color-3.jpg"></li>
+                        <li class="color-item" style="background:#fcdb86" data-image="img/color-2.jpg"></li>
+                      </ul>
+                    </div>
+                    <a class="users-list-name" href="Product-details.html">T-shirt</a>
+                    <div class="users-list-date">200 <span>SAR</span></div>
                   </li>
                   <li>
-                    <img src="{{ Storage::url('site_assets/images/misc/starts-disable.svg') }}" alt="">
+                    <div class="product-container">
+                      <a href="Product-details.html" class="image-container" data-image="img/M5665_560_5.JPG">
+
+                        <div class="card-front"><img src="img/M5665_560_5.JPG" /></div>
+                        <div class="card-back"><img src="img/M5665_560_6.JPG" /></div>
+                      </a>
+
+                      <ul class="color-list">
+                        <li class="color-item" style="background:white" data-image="img/M5665_560_5.JPG"></li>
+                        <li class="color-item" style="background:darkgreen" data-image="img/M5665_Q55_5.JPG"></li>
+                        <li class="color-item" style="background:pink" data-image="img/M5632_J10_1.JPG"></li>
+                        <li class="color-item" style="background:darkblue" data-image="img/M5632_R31_6.JPG"></li>
+                        <li class="color-item" style="background:black" data-image="img/M5632_608_5.JPG"></li>
+                      </ul>
+                    </div>
+                    <a class="users-list-name" href="Product-details.html">T-shirt</a>
+                    <div class="users-list-date">200 <span>SAR</span></div>
                   </li>
+                  <li>
+                    <div class="product-container">
+                      <a href="Product-details.html" class="image-container" data-image="img/M4650_R60_5.JPG">
+
+                        <div class="card-front"><img src="img/M4650_R60_5.JPG" /></div>
+                        <div class="card-back"><img src="img/M4650_R60_6.JPG" /></div>
+                      </a>
+
+                      <ul class="color-list">
+                        <li class="color-item" style="background:brown" data-image="img/M4650_R60_5.JPG"></li>
+                        <li class="color-item" style="background:black" data-image="img/M4650_102_5.JPG"></li>
+                      </ul>
+                    </div>
+                    <a class="users-list-name" href="Product-details.html">T-shirt</a>
+                    <div class="users-list-date">200 <span>SAR</span></div>
+                  </li>
+                  <li>
+                    <div class="product-container">
+                      <a href="Product-details.html" class="image-container" data-image="img/M5620_100_5.JPG">
+
+                        <div class="card-front"><img src="img/M5620_100_5.JPG" /></div>
+                        <div class="card-back"><img src="img/M5620_100_6.JPG" /></div>
+                      </a>
+
+                      <ul class="color-list">
+                        <li class="color-item" style="background:grey" data-image="img/M5620_100_5.JPG"></li>
+                        <li class="color-item" style="background:black" data-image="img/M5620_102_6.JPG"></li>
+                      </ul>
+                    </div>
+                    <a class="users-list-name" href="Product-details.html">T-shirt</a>
+                    <div class="users-list-date">200 <span>SAR</span></div>
+                  </li>
+                  <li>
+                    <div class="product-container">
+                      <a href="Product-details.html" class="image-container" data-image="img/M4622_Q22_7.JPG">
+
+                        <div class="card-front"><img src="img/M4622_Q22_7.JPG" /></div>
+                        <div class="card-back"><img src="img/M4622_Q22_6.JPG" /></div>
+                      </a>
+
+                      <ul class="color-list">
+                        <li class="color-item" style="background:orangered" data-image="img/M4622_Q22_7.JPG"></li>
+                        <li class="color-item" style="background:white" data-image="img/M4622_129_1.JPG"></li>
+                        <li class="color-item" style="background:black" data-image="img/M4622_102_1.JPG"></li>
+                      </ul>
+                    </div>
+                    <a class="users-list-name" href="Product-details.html">T-shirt</a>
+                    <div class="users-list-date">200 <span>SAR</span></div>
+                  </li>
+
+                  <li>
+                    <div class="product-container">
+                      <a href="Product-details.html" class="image-container" data-image="img/front.png">
+
+                        <div class="card-front"><img src="img/front.png" /></div>
+                        <div class="card-back"><img src="img/back.png" /></div>
+                      </a>
+
+                      <ul class="color-list">
+                        <li class="color-item" style="background:darkred" data-image="img/tshirt-2.jpg"></li>
+                        <li class="color-item" style="background:darkblue" data-image="img/tshirt-3.jpg"></li>
+                        <li class="color-item" style="background:darkmagenta" data-image="img/tshirt-4.jpg"></li>
+                        <li class="color-item" style="background:darkgreen" data-image="img/tshirt-5.jpg"></li>
+                        <li class="color-item" style="background:black" data-image="img/tshirt-1.jpg"></li>
+                        <li class="color-item" style="background:gray" data-image="img/tshirt-2.jpg"></li>
+                      </ul>
+                    </div>
+                    <a class="users-list-name" href="Product-details.html">T-shirt</a>
+                    <div class="users-list-date">200 <span>SAR</span></div>
+                  </li>
+
+                  <li>
+                    <div class="product-container">
+                      <a href="Product-details.html" class="image-container" data-image="img/front-1.JPG">
+  
+                        <div class="card-front"><img src="img/front-1.JPG" /></div>
+                        <div class="card-back"><img src="img/back-1.JPG" /></div>
+                      </a>
+  
+                      <ul class="color-list">
+                        <li class="color-item" style="background:darkred" data-image="img/color-1.jpg"></li>
+                        <li class="color-item" style="background:darkblue" data-image="img/color-3.jpg"></li>
+                        <li class="color-item" style="background:#fcdb86" data-image="img/color-2.jpg"></li>
+                      </ul>
+                    </div>
+                    <a class="users-list-name" href="Product-details.html">T-shirt</a>
+                    <div class="users-list-date">200 <span>SAR</span></div>
+                  </li>
+                  <li>
+                    <div class="product-container">
+                      <a href="Product-details.html" class="image-container" data-image="img/M5665_560_5.JPG">
+  
+                        <div class="card-front"><img src="img/M5665_560_5.JPG" /></div>
+                        <div class="card-back"><img src="img/M5665_560_6.JPG" /></div>
+                      </a>
+  
+                      <ul class="color-list">
+                        <li class="color-item" style="background:white" data-image="img/M5665_560_5.JPG"></li>
+                        <li class="color-item" style="background:darkgreen" data-image="img/M5665_Q55_5.JPG"></li>
+                        <li class="color-item" style="background:pink" data-image="img/M5632_J10_1.JPG"></li>
+                        <li class="color-item" style="background:darkblue" data-image="img/M5632_R31_6.JPG"></li>
+                        <li class="color-item" style="background:black" data-image="img/M5632_608_5.JPG"></li>
+                      </ul>
+                    </div>
+                    <a class="users-list-name" href="Product-details.html">T-shirt</a>
+                    <div class="users-list-date">200 <span>SAR</span></div>
+                  </li>
+                  <li>
+                    <div class="product-container">
+                      <a href="Product-details.html" class="image-container" data-image="img/M4650_R60_5.JPG">
+  
+                        <div class="card-front"><img src="img/M4650_R60_5.JPG" /></div>
+                        <div class="card-back"><img src="img/M4650_R60_6.JPG" /></div>
+                      </a>
+  
+                      <ul class="color-list">
+                        <li class="color-item" style="background:brown" data-image="img/M4650_R60_5.JPG"></li>
+                        <li class="color-item" style="background:black" data-image="img/M4650_102_5.JPG"></li>
+                      </ul>
+                    </div>
+                    <a class="users-list-name" href="Product-details.html">T-shirt</a>
+                    <div class="users-list-date">200 <span>SAR</span></div>
+                  </li>
+                  <li>
+                    <div class="product-container">
+                      <a href="Product-details.html" class="image-container" data-image="img/M5620_100_5.JPG">
+  
+                        <div class="card-front"><img src="img/M5620_100_5.JPG" /></div>
+                        <div class="card-back"><img src="img/M5620_100_6.JPG" /></div>
+                      </a>
+  
+                      <ul class="color-list">
+                        <li class="color-item" style="background:grey" data-image="img/M5620_100_5.JPG"></li>
+                        <li class="color-item" style="background:black" data-image="img/M5620_102_6.JPG"></li>
+                      </ul>
+                    </div>
+                    <a class="users-list-name" href="Product-details.html">T-shirt</a>
+                    <div class="users-list-date">200 <span>SAR</span></div>
+                  </li>
+                  <li>
+                    <div class="product-container">
+                      <a href="Product-details.html" class="image-container" data-image="img/M4622_Q22_7.JPG">
+  
+                        <div class="card-front"><img src="img/M4622_Q22_7.JPG" /></div>
+                        <div class="card-back"><img src="img/M4622_Q22_6.JPG" /></div>
+                      </a>
+  
+                      <ul class="color-list">
+                        <li class="color-item" style="background:orangered" data-image="img/M4622_Q22_7.JPG"></li>
+                        <li class="color-item" style="background:white" data-image="img/M4622_129_1.JPG"></li>
+                        <li class="color-item" style="background:black" data-image="img/M4622_102_1.JPG"></li>
+                      </ul>
+                    </div>
+                    <a class="users-list-name" href="Product-details.html">T-shirt</a>
+                    <div class="users-list-date">200 <span>SAR</span></div>
+                  </li>
+
+                  
+
                 </ul>
-                <span class="label-rating text-warning">4.5</span>
-              </div> <!-- rating-wrap.// -->
-            </figcaption>
-          </figure>
+
+              </div>
+
+          </div>
+        <!-- /.col-md-12 -->
+
+
         </div>
-
-        @endforeach 
-
-
-      </div> <!-- box.// -->
-    </aside> <!-- col.// -->
-  </div> <!-- row.// -->
-
-</div> <!-- container .//  -->
-</section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
-
-
-<div class="container">
-  <section class="padding-bottom">
-
-    <header class="section-heading mb-4">
-      <h3 class="title-section"> @lang('site.best_selling') </h3>
-    </header>
-
-    <div class="row row-sm">
-
-      @foreach ($best_selling_products as $best_selling_product)
-      <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-        <div href="#" class="card card-sm card-product-grid">
-          <a href="#" class="img-wrap"> 
-            <b class="badge badge-danger mr-1">10% خصم</b>
-            <img src="{{ Storage::url('products/'.$best_selling_product->image) }}"> 
-          </a>
-          <figcaption class="info-wrap">
-            <a href="#" class="title"> {{ $best_selling_product->name }} </a>
-            <div class="price-wrap">
-              <span class="price">{{ $best_selling_product->price }} جنيه </span>
-              {{-- <del class="price-old">$90</del> --}}
-            </div> <!-- price-wrap.// -->
-          </figcaption>
-        </div>
-      </div> <!-- col.// -->
-      @endforeach
-
-    </div> <!-- row.// -->
-  </section>
-</div>
-
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+      
+    </section>
+    <!-- /.content -->
+  </div>
 @endsection
 
 @section('scripts')
 <script type="text/javascript">
   $(function() {
-          $(".center").slick({
-        dots: true,
-        infinite: true,
-        centerMode: true,
-        slidesToShow: 5,
-        slidesToScroll: 3
-      });
+    $(".center").slick({
+      dots: true,
+      infinite: true,
+      centerMode: true,
+      slidesToShow: 5,
+      slidesToScroll: 3
+    });
   });
 </script>
 @endsection
