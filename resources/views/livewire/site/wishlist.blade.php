@@ -1,14 +1,56 @@
-<div class='row' >
-    @foreach ($items as $item)
-    <div class="col-md-6">
-      <figure class="itemside mb-4">
-        <div class="aside"><img src="{{ Storage::url('products/'.$item->product?->image) }}" class="border img-md"></div>
-        <figcaption class="info">
-            <a href="{{ $item->product?->url() }}" class="title">{{ $item->product?->name }}</a>
-            <p class="price mb-2"> {{ $item->product?->price }} جنيه </p>
-            <a href="#" wire:click='removeFromWishList({{ $item->product_id }})' class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="حذف من قائمه الامنيات"> <i class="fa fa-times"></i> </a>
-        </figcaption>
-    </figure>
-</div> <!-- col.// -->
-@endforeach
+<div>
+  @foreach ($wishlist_products as $wishlist_product)
+  <div class="card">
+    <div class="card-body">
+      <div class="square-img">
+        <img src="{{ Storage::url('products/'.$wishlist_product->product?->front_image) }}">
+      </div>
+      <div class="d-inline-flex flex-column flex-fill">
+        <div class="category-top">
+          <h4 class="card-title"> {{ $wishlist_product->product?->name }} </h4>
+          <h4 class="card-title"> {{ $wishlist_product->product?->price }} @lang('site.SAR') <label class="AddToWishlist"> <input type="checkbox" checked> <i class="fa fa-heart"></i></label></h4>
+        </div>
+        <div class="category-bottom">
+          <div>
+            <p class="card-text">
+              {!! $wishlist_product->product?->description !!}
+            </p>
+            <div class="tag-btns-container">
+              <a href="#" class="btn tag-btn"> Tag link </a>
+              <a href="#" class="btn tag-btn"> Tag link </a>
+              <a href="#" class="btn tag-btn"> Tag link </a>
+              <a href="#" class="btn tag-btn"> Tag link </a>
+              <a href="#" class="btn tag-btn"> Tag link </a>
+              <a href="#" class="btn tag-btn"> Tag link </a>
+            </div>
+          </div>
+          <div class="buttons-container">
+            <a href="{{ route('custom-designs') }}" class=" btn btn-primary"> @lang('site.Customize') </a>
+            <a href="#" class=" btn btn-primary"  data-toggle="modal" data-target="#exampleModal{{ $wishlist_product->id }}"> @lang('site.delete') </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{ $wishlist_product->id }}  <div class="modal fade" id="exampleModal{{ $wishlist_product->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header"> @lang('site.Confirmation') </div>
+        <div class="modal-body">
+          @lang('site.Are you sure you want to delete') ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-white" data-dismiss="modal"> @lang('site.No') </button>
+          <button type="button" class="btn btn-primary" wire:click="removeFromWishList({{ $wishlist_product->product?->id }})" data-dismiss="modal" > @lang('site.Yes') </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @endforeach
+
+
 </div>
+
+

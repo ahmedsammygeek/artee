@@ -16,8 +16,7 @@ class FollowUser extends Component
     {
 
         if (!Auth::check()) {
-             $this->alert('success' , trans('site.you need to login first') );
-
+            $this->alert('error' , trans('site.you need to login first') );
             return true;
         }
 

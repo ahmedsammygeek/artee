@@ -23,7 +23,9 @@ class SiteController extends Controller
     public function index() {
         $slides = Slide::where('is_active' , 1 )->latest()->get();
         $recomanded_users = User::where('type' , 1 )->orderByRaw("RAND()")->take(8)->get();
-        return view('site.index' , compact('slides' , 'recomanded_users' ) );
+        $products = Product::inRandomOrder()->take(9)->get();
+        $users = User::inRandomOrder()->take(3)->get();
+        return view('site.index' , compact('slides' , 'recomanded_users' , 'products' , 'users' ) );
     }
 
 
@@ -100,7 +102,8 @@ class SiteController extends Controller
      */
     public function products()
     {
-        return view('site.products');
+        $products = Product::with(['variations.color'])->latest()->get();
+        return view('site.products' , compact('products') );
     }
 
     /**

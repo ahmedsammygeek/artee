@@ -1,6 +1,12 @@
+@php
+$lang = LaravelLocalization::getCurrentLocale();
+if ($lang == 'ar') {
+  $dir = 'rtl';
+} else {
+  $dir = 'ltr';
+}
+@endphp
 @extends('site.layouts.master')
-
-
 @section('page_content')
 
 <section class="content">
@@ -54,7 +60,7 @@
 
                     </ul>
                   </div>
-                  <a class="users-list-name" href="Product-details.html">T-shirt</a>
+                  <a class="users-list-name" href="{{ $product->url() }}">{{ $product->name }}</a>
                   <div class="users-list-date"> {{ $product->price }} <span> @lang('site.SAR')</span></div>
                 </li>
                 @endforeach
@@ -96,7 +102,7 @@
             <div class="card card-widget">
               <div class="card-header">
                 <div class="user-block">
-                  <img class="img-circle" src="img/user1-128x128.jpg" alt="User Image">
+                  <img class="img-circle" src="{{ asset('site_assets/'.$dir.'img/user1-128x128.jpg') }}" alt="User Image">
                   <span class="username"><a href="#">Jonathan Burke Jr.</a></span>
                   <span class="description">@Jonathan</span>
                 </div>
@@ -110,7 +116,7 @@
               <div class="card-body">
                 <a href="Product-details.html" class="text-center post-image-container">
                   <div class="badge badge-light">200 <span>SAR</span></div>
-                  <img class="img-fluid pad" src="img/tshirt-4.jpg" alt="Photo">
+                  <img class="img-fluid pad" src="{{ asset('site_assets/'.$dir.'img/tshirt-4.jpg') }}" alt="Photo">
                 </a>
 
                 <p>I took this photo this morning. What do you guys think?</p>
@@ -192,7 +198,7 @@
 
         <!-- list-item -->
         <div class="media">
-          <div class="mr-3 media-img"> <img src="img/avatar4.png" /> </div>
+          <div class="mr-3 media-img"> <img src="{{ asset('site_assets/'.$dir.'/img/avatar4.png') }}" /> </div>
           <div class="media-body">
             <p class="m-0">Moataz Ibrahim</p>
           </div>
@@ -200,7 +206,7 @@
         </div>
         <!-- list-item -->
         <div class="media">
-          <div class="mr-3 media-img"> <img src="img/avatar4.png" /> </div>
+          <div class="mr-3 media-img"> <img src="{{ asset('site_assets/'.$dir.'/img/avatar4.png') }}" /> </div>
           <div class="media-body">
             <p class="m-0">Moataz Ibrahim</p>
           </div>
@@ -208,7 +214,7 @@
         </div>
         <!-- list-item -->
         <div class="media">
-          <div class="mr-3 media-img"> <img src="img/avatar4.png" /> </div>
+          <div class="mr-3 media-img"> <img src="{{ asset('site_assets/'.$dir.'/img/avatar4.png') }}" /> </div>
           <div class="media-body">
             <p class="m-0">Moataz Ibrahim</p>
           </div>
@@ -231,12 +237,12 @@
         <!-- list-item -->
         <div class="list-item ">
           <div class="media">
-            <a class="mr-3 heigh-recomanded-img" href="#"> <img src="img/design-1.jpg"> </a>
+            <a class="mr-3 heigh-recomanded-img" href="#"> <img src="{{ asset('site_assets/'.$dir.'/img/design-1.jpg') }}"> </a>
             <div class="media-body">
               <a href="#" class="m-0">Design Recomanded Number 1</a>
               <!-- designer-item -->
               <a href="#" class="media">
-                <div class="mr-2 media-img"> <img src="img/avatar4.png" /> </div>
+                <div class="mr-2 media-img"> <img src="{{ asset('site_assets/'.$dir.'/img/avatar4.png') }}" /> </div>
                 <div class="media-body">
                   <p class="m-0 text-gray">Moataz Ibrahim</p>
                 </div>
@@ -248,12 +254,12 @@
         <!-- list-item -->
         <div class="list-item ">
           <div class="media">
-            <a class="mr-3 heigh-recomanded-img" href="#"> <img src="img/design-2.png"> </a>
+            <a class="mr-3 heigh-recomanded-img" href="#"> <img src="{{ asset('site_assets/'.$dir.'/img/design-2.png') }}"> </a>
             <div class="media-body">
               <a href="#" class="m-0">Design Recomanded Number 2</a>
               <!-- designer-item -->
               <a href="#" class="media">
-                <div class="mr-2 media-img"> <img src="img/avatar4.png" /> </div>
+                <div class="mr-2 media-img"> <img src="{{ asset('site_assets/'.$dir.'/img/avatar4.png') }}" /> </div>
                 <div class="media-body">
                   <p class="m-0 text-gray">Moataz Ibrahim</p>
                 </div>
@@ -265,12 +271,12 @@
         <!-- list-item -->
         <div class="list-item ">
           <div class="media">
-            <a class="mr-3 heigh-recomanded-img" href="#"> <img src="img/design-1.jpg"> </a>
+            <a class="mr-3 heigh-recomanded-img" href="#"> <img src="{{ asset('site_assets/'.$dir.'/img/design-1.jpg') }}"> </a>
             <div class="media-body">
               <a href="#" class="m-0">Design Recomanded Number 3</a>
               <!-- designer-item -->
               <a href="#" class="media">
-                <div class="mr-2 media-img"> <img src="img/avatar4.png" /> </div>
+                <div class="mr-2 media-img"> <img src="{{ asset('site_assets/'.$dir.'/img/avatar4.png') }}" /> </div>
                 <div class="media-body">
                   <p class="m-0 text-gray">Moataz Ibrahim</p>
                 </div>
@@ -284,22 +290,7 @@
 
 
     <!--------- Heigh Recomanded Designs List --------->
-    <div class="section footer-sidebar">
-      <ul class="footer-sidebar-list">
-        <li><a href="Contact-us.html">Contact Us</a></li>
-        <li><a href="About-us.html">About Us</a></li>
-        <li><a href="privacy.html">Privacy & Securty</a></li>
-        <li><a href="Terms.html">Terms & Conditions</a></li>
-        <li><a href="#" class="fab fa-facebook"></a></li>
-        <li><a href="#" class="fab fa-twitter"></a></li>
-        <li><a href="#" class="fab fa-instagram"></a></li>
-        <li class="col-md-6 mb-2 p-2"><a href="#"> <img class="vatFotter" src="images/VAT.png"/> </a></li>
-        <li class="col-md-6 mb-2 p-2"><a href="#"> <img src="images/maroofStamp.png"/> </a></li>
-        <li class="col-md-6 p-2"><a href="#"> <img class="vatFotter" src="images/googleplay.png"/> </a></li>
-        <li class="col-md-6 p-2"><a href="#"> <img src="images/appstore.png"/> </a></li>
-      </ul>
-      <p>All Rights Reserved</p>
-    </div>
+    @include('site.layouts.footer')
 
   </div>
 

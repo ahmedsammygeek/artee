@@ -103,7 +103,7 @@
                   </a>
                   <ul class="color-list">
                     @foreach ($product->variations->unique('color_id') as $product_color_variation)
-                      <li class="color-item" style="background:{{ $product_color_variation->color }}" data-image="{{ Storage::url('products/'.$product->front_image) }}"></li>
+                      <li class="color-item" style="background:{{ $product_color_variation->color->code }}" data-image="{{ Storage::url('products/'.$product->front_image) }}"></li>
                     @endforeach
                   </ul>
                 </div>

@@ -38,7 +38,7 @@
                   
                 </ul>
               </div>
-              <a class="users-list-name" href="Product-details.html">T-shirt</a>
+              <a class="users-list-name" href="{{ $product->url() }}">{{ $product->name }}</a>
               <div class="users-list-date"> {{ $product->price }} <span> @lang('site.SAR')</span></div>
             </li>
             @endforeach

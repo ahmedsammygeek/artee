@@ -1,141 +1,191 @@
+@php
+$lang = LaravelLocalization::getCurrentLocale();
+if ($lang == 'ar') {
+  $dir = 'rtl';
+} else {
+  $dir = 'ltr';
+}
+@endphp
+
 @extends('site.layouts.master')
 
 @section('page_content')
-<section class="section-content padding-y">
-  <div class="container">
-    <div class="card mb-3">
-      <div class="card-body">
-        
-        <hr>
-        <div class="row">
-          <div class="col-md-2"> قم بالحث داخل المنتجات عبر </div> <!-- col.// -->
-          <div class="col-md-10"> 
-            <ul class="list-inline">
-              <li class="list-inline-item mr-3 dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> الماركه </a>
-                <div class="dropdown-menu p-3" style="max-width:400px;">  
-                <label class="form-check">
-                   <input type="radio" name="myfilter" class="form-check-input"> ماركه 1
-                 </label>
-                 <label class="form-check">
-                   <input type="radio" name="myfilter" class="form-check-input"> ماركه 2
-                 </label>
-                 <label class="form-check">
-                   <input type="radio" name="myfilter" class="form-check-input"> ماركه 3
-                 </label>
-                 
-               </div> <!-- dropdown-menu.// -->
-             </li>
-             <li class="list-inline-item mr-3 dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">  التصنيف </a>
-              <div class="dropdown-menu p-3"> 
-                <label class="form-check">   <input type="checkbox" class="form-check-input"> تصنيف 1    </label>
-                <label class="form-check">   <input type="checkbox" class="form-check-input"> تصنيف 3    </label>
-                <label class="form-check">   <input type="checkbox" class="form-check-input"> تصنيف 3    </label>
-                <label class="form-check">   <input type="checkbox" class="form-check-input"> تصنيف 4    </label>
-         
-              </div> <!-- dropdown-menu.// -->
-            </li>
-            
-            <li class="list-inline-item mr-3"><a href="#">اللون</a></li>
-            <li class="list-inline-item mr-3"><a href="#">الحجم</a></li>
-            <li class="list-inline-item mr-3">
-              <div class="form-inline">
-                <label class="mr-2"> السعر </label>
-                <input class="form-control form-control-sm" placeholder="الحد الادنى" type="number">
-                <span class="px-2"> - </span>
-                <input class="form-control form-control-sm" placeholder="الحد الاقصى" type="number">
-                <button type="submit" class="btn btn-sm btn-light ml-2">  </button>
-              </div>
-            </li>
-           
-          </ul>
-        </div> <!-- col.// -->
-      </div> <!-- row.// -->
-    </div> <!-- card-body .// -->
-  </div> <!-- card.// -->
-  <!-- ============================ FILTER TOP END.// ================================= -->
+<div class="content-wrapper pt-3">
 
-  <header class="mb-3">
-    <div class="form-inline">
-      <strong class="mr-md-auto"> تم العثور على 900 منتج  </strong>
-      <select class="mr-2 form-control">
-        <option> الترتيب حسب </option>
-        <option>الاكثير مبيعا</option>
-        <option>الاكثير تقييما</option>
-        <option>الاحدث</option>
-        <option>الاقدم</option>
-        <option>الاقل سعرا</option>
-        <option>الاعلى سعرا</option>
-      </select>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="col-md-9">
+          <!-------------------------- Best Selling --------------------------->
+
+          <!-------------------------- Products List --------------------------->
+          <div class="section Products-list">
+            <div class="title d-flex justify-content-between col-md-12">
+              <h5 class="mb-2">Best Selling Products</h5>
+            </div>                   
+
+
+            <ul class="users-list clearfix">
+
+              @foreach ($products as $product)
+                <li>
+                  <div class="product-container">
+                    <a href="{{ $product->url() }}" class="image-container" data-image="{{ Storage::url('products/'.$product->front_image) }}">
+                      <div class="card-front"><img src="{{ Storage::url('products/'.$product->front_image) }}" /></div>
+                      <div class="card-back"><img src="{{ Storage::url('products/'.$product->back_image) }}" /></div>
+                    </a>
+                    <ul class="color-list">
+                      @foreach ($product->variations->unique('color_id') as $prodict_color_variate)
+                      <li class="color-item" style="background:{{ $prodict_color_variate->color?->code }}" data-image="img/color-2.jpg"></li>
+                      @endforeach
+
+                    </ul>
+                  </div>
+                  <a class="users-list-name" href="{{ $product->url() }}">{{ $product->name }}</a>
+                  <div class="users-list-date"> {{ $product->price }} <span> @lang('site.SAR')</span></div>
+                </li>
+              @endforeach
+
+            </ul>
+
+        </div>
+
+        </div>
+        <!-- /.col -->
+
+        <div class="col-md-3 right-sidebar">
+
+
+          <!--------- Suggested Designers List --------->
+          <div class="section">
+            <div class="title col-md-12">
+              <h5 class="mb-2">Suggested Designers</h5>
+            </div>
+
+            <div class="sugested-designer-list">
+
+              <!-- list-item -->
+              <div class="media">
+                <div class="mr-3 media-img"> <img src="{{ asset('site_assets/'.$dir.'/img/avatar4.png') }}" /> </div>
+                <div class="media-body">
+                  <p class="m-0">Moataz Ibrahim</p>
+                </div>
+                <div class="ml-auto"> <button type="button" class="btn text-primary">follow </button> </div>
+              </div>
+              <!-- list-item -->
+              <div class="media">
+                <div class="mr-3 media-img"> <img src="{{ asset('site_assets/'.$dir.'/img/avatar4.png') }}" /> </div>
+                <div class="media-body">
+                  <p class="m-0">Moataz Ibrahim</p>
+                </div>
+                <div class="ml-auto"> <button type="button" class="btn text-primary">follow </button> </div>
+              </div>
+              <!-- list-item -->
+              <div class="media">
+                <div class="mr-3 media-img"> <img src="{{ asset('site_assets/'.$dir.'/img/avatar4.png') }}" /> </div>
+                <div class="media-body">
+                  <p class="m-0">Moataz Ibrahim</p>
+                </div>
+                <div class="ml-auto"> <button type="button" class="btn text-primary">follow </button> </div>
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+          <!--------- Heigh Recomanded Designs List --------->
+          <div class="section">
+            <div class="title col-md-12 mt-4">
+              <h5 class="mb-2">Heigh Recomanded Designs</h5>
+            </div>
+            <div class="list-group heigh-recomanded-list">
+
+              <!-- list-item -->
+              <div class="list-item ">
+                <div class="media">
+                  <a class="mr-3 heigh-recomanded-img" href="#"> <img src="{{ asset('site_assets/'.$dir.'/img/design-1.jpg') }}"> </a>
+                  <div class="media-body">
+                    <a href="#" class="m-0">Design Recomanded Number 1</a>
+                    <!-- designer-item -->
+                    <a href="#" class="media">
+                      <div class="mr-2 media-img"> <img src="{{ asset('site_assets/'.$dir.'/img/avatar4.png') }}" /> </div>
+                      <div class="media-body">
+                        <p class="m-0 text-gray">Moataz Ibrahim</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- list-item -->
+              <div class="list-item ">
+                <div class="media">
+                  <a class="mr-3 heigh-recomanded-img" href="#"> <img src="{{ asset('site_assets/'.$dir.'/img/design-2.png') }}"> </a>
+                  <div class="media-body">
+                    <a href="#" class="m-0">Design Recomanded Number 2</a>
+                    <!-- designer-item -->
+                    <a href="#" class="media">
+                      <div class="mr-2 media-img"> <img src="{{ asset('site_assets/'.$dir.'/img/avatar4.png') }}" /> </div>
+                      <div class="media-body">
+                        <p class="m-0 text-gray">Moataz Ibrahim</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- list-item -->
+              <div class="list-item ">
+                <div class="media">
+                  <a class="mr-3 heigh-recomanded-img" href="#"> <img src="{{ asset('site_assets/'.$dir.'/img/design-1.jpg') }}"> </a>
+                  <div class="media-body">
+                    <a href="#" class="m-0">Design Recomanded Number 3</a>
+                    <!-- designer-item -->
+                    <a href="#" class="media">
+                      <div class="mr-2 media-img"> <img src="{{ asset('site_assets/'.$dir.'/img/avatar4.png') }}" /> </div>
+                      <div class="media-body">
+                        <p class="m-0 text-gray">Moataz Ibrahim</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!--------- Heigh Recomanded Designs List --------->
+          <div class="section footer-sidebar">
+            <ul class="footer-sidebar-list">
+              <li><a href="Contact-us.html">Contact Us</a></li>
+              <li><a href="About-us.html">About Us</a></li>
+              <li><a href="privacy.html">Privacy & Securty</a></li>
+              <li><a href="Terms.html">Terms & Conditions</a></li>
+              <li><a href="#" class="fab fa-facebook"></a></li>
+              <li><a href="#" class="fab fa-twitter"></a></li>
+              <li><a href="#" class="fab fa-instagram"></a></li>
+              <li class="col-md-6 mb-2 p-2"><a href="#"> <img class="vatFotter" src="images/VAT.png"/> </a></li>
+              <li class="col-md-6 mb-2 p-2"><a href="#"> <img src="images/maroofStamp.png"/> </a></li>
+              <li class="col-md-6 p-2"><a href="#"> <img class="vatFotter" src="images/googleplay.png"/> </a></li>
+              <li class="col-md-6 p-2"><a href="#"> <img src="images/appstore.png"/> </a></li>
+            </ul>
+            <p>All Rights Reserved</p>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- /.row -->
+
 
     </div>
-  </header><!-- sect-heading -->
-
-  <div class="row">
-
-    @for ($i = 0; $i < 12 ; $i++)
-    <div class="col-md-3">
-      <figure class="card card-product-grid">
-        <div class="img-wrap"> 
-          <span class="badge badge-danger"> جديد </span>
-          <img src="{{ Storage::url('site_assets/images/items/1.jpg') }}">
-        </div> <!-- img-wrap.// -->
-        <figcaption class="info-wrap">
-          <a href="#" class="title mb-2"> هنا يتم وضع اسم املنتج </a>
-          <div class="rating-wrap mb-2">
-          <ul class="rating-stars">
-            <li style="width:100%" class="stars-active"> 
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-              <i class="fa fa-star"></i> 
-            </li>
-            <li>
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-              <i class="fa fa-star"></i> 
-            </li>
-          </ul>
-          <div class="label-rating">4.5</div>
-        </div>
-          <div class="price-wrap">
-            <span class="price">250 جنيه</span> 
-          </div>        
-          <p class="text-muted "> هنا يتم وضع تفصيل بسيط للمنتج </p>
-          <hr>
-
-          <a href="#" class="btn  btn-primary"> 
-            <i class="fas fa-shopping-cart"></i> <span class="text"> اضف الى السله </span> 
-          </a>
-
-          <a href="#" class="btn btn-primary"><i class="fa fa-heart"></i>  </a>
-
-        </figcaption>
-      </figure>
-    </div> <!-- col.// -->
-    @endfor
-
-  </div>
-
-
-  <nav class="mb-4" aria-label="Page navigation sample">
-    <ul class="pagination">
-      <li class="page-item disabled"><a class="page-link" href="#">السابق</a></li>
-      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">4</a></li>
-      <li class="page-item"><a class="page-link" href="#">5</a></li>
-      <li class="page-item"><a class="page-link" href="#">التالى</a></li>
-    </ul>
-  </nav>
-
-
-</div> <!-- container .//  -->
-</section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
-
-
-
-
-
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
 @endsection

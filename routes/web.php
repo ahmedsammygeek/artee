@@ -100,9 +100,17 @@ Route::group([
     Route::get('/custom-designs' , [SiteController::class , 'custom_designs'])->name('custom-designs');
     Route::get('/explore' , [SiteController::class , 'explore'])->name('explore');
     Route::get('/products' , [SiteController::class , 'products'])->name('products');
+    Route::get('/designs' , [SiteController::class , 'designs'])->name('designs');
+    Route::get('/cart' , [SiteController::class , 'cart'])->name('cart');
 
     Route::group(['middleware' => 'auth'], function() {
         Route::get('/profile' , [UserProfileController::class , 'index'] )->name('profile.index');
+        Route::get('/wishlist' , [UserProfileController::class , 'wishlist'] )->name('wishlist');
+        Route::get('/orders' , [UserProfileController::class , 'orders'] )->name('orders');
+        Route::get('/logout' , [UserProfileController::class , 'logout'] )->name('logout');
+        Route::get('/settings' , [UserProfileController::class , 'settings'] )->name('settings');
+        Route::get('/followers' , [UserProfileController::class , 'followers'] )->name('followers');
+        Route::get('/diamond' , [UserProfileController::class , 'diamond'] )->name('diamond');
     });
 
 });
