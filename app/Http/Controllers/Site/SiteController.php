@@ -267,12 +267,13 @@ class SiteController extends Controller
 
     public function update_phone(Request $request)
     {
-
         $user = Auth::user();
         $user->phone = $request->phone;
         $user->save();
         dispatch(new SendVerificationCodeToViaPhoneNumberJob($request->phone));
         return redirect(route('site.verify_phone'));
     }
+
+
 
 }

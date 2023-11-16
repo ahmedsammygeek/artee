@@ -74,15 +74,12 @@ Route::group([
         Route::patch('profile' , [ProfileController::class , 'update'] )->name('profile.update');
         Route::get('password' , [ProfileController::class , 'password'] )->name('password');
         Route::patch('password' , [ProfileController::class ,'update_password'] )->name('password.update');
-        
         Route::get('users/{user}/desgins' , [UserDesginController::class , 'user_desgins'] )->name('users.desgins');
         Route::get('users/{user}/orders' , [UserController::class , 'orders'] )->name('users.orders');
         Route::get('users/{user}/login' , [UserController::class , 'login'] )->name('users.login');
-
         Route::get('products/{product}/variations/create'  , [ProductVariationController::class , 'create'] )->name('products.variations.create');
         Route::post('products/{product}/variations'  , [ProductVariationController::class , 'store'] )->name('products.variations.store');
         Route::post('/get_new_varition_main_row' , [AjaxController::class , 'get_new_varition_main_row'] )->name('get_new_varition_main_row');
-
         Route::post('/get_new_varition_color_row' , [AjaxController::class , 'get_new_varition_color_row'] )->name('get_new_varition_color_row');
     });
     Route::get('/' , [SiteController::class, 'index'] );
@@ -102,6 +99,7 @@ Route::group([
     Route::get('/products' , [SiteController::class , 'products'])->name('products');
     Route::get('/designs' , [SiteController::class , 'designs'])->name('designs');
     Route::get('/cart' , [SiteController::class , 'cart'])->name('cart');
+
 
     Route::group(['middleware' => 'auth'], function() {
         Route::get('/profile' , [UserProfileController::class , 'index'] )->name('profile.index');

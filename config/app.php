@@ -242,6 +242,7 @@ return [
         'AWS' => Aws\Laravel\AwsFacade::class,
         'Image' => Intervention\Image\Facades\Image::class , 
         'Smsmisr' => Ghanem\LaravelSmsmisr\Smsmisr::class,
+        
 
     ],
 

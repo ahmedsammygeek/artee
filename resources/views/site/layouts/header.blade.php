@@ -5,7 +5,7 @@
  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
   <div class="container-fluid">
     <a href="{{ url('/') }}" class="navbar-brand">
-      <img src="{{ asset('site_assets/'.$dir.'/images/logo.png') }}" alt="Artee" class="brand-image">
+      <img src="{{ Storage::url('settings/'.$data['settings']->logo) }}" alt="Artee" class="brand-image">
     </a>
 
     <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse"

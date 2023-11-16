@@ -105,5 +105,5 @@ return array (
   'delete' => 'delete' , 
   'product deleted successfully from Your Wishlist' => 'product deleted successfully from Your Wishlist' , 
   'Yes' => 'Yes' , 
-  '' => '' , 
+  'No orders yet for you to display' => 'No orders yet for you to display' , 
 ); 

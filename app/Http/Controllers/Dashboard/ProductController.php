@@ -11,6 +11,7 @@ use App\Models\ProductImage;
 use App\Models\Country;
 use App\Models\Variation;
 use Auth;
+use Image;
 use App\Http\Requests\Dashboard\Products\StoreProductRequest;
 use App\Http\Requests\Dashboard\Products\UpdateProductRequest;
 class ProductController extends Controller
@@ -32,7 +33,6 @@ class ProductController extends Controller
      */
     public function create()
     {   
-
         $colors = Color::all();
         $sizes = Size::all();
         $countries = Country::all();
@@ -45,9 +45,17 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductRequest $request)
+    public function store(Request $request)
     {
 
+        // StoreProductRequest  
+        $image = basename($request->file('front_image')->store('products'));
+
+        $img = Image::make(storage_path() .'/app/public/products/'.$image);
+        $img->colorize(-100, 0, 100);
+        $img->save(storage_path() .'/app/public'.'/products/'. 'ahmedsami.png' , '100');
+
+        dd($request->all());
 
         $product = new Product;
 

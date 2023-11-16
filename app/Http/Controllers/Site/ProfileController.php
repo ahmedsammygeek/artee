@@ -28,6 +28,12 @@ class ProfileController extends Controller
     }
 
 
+    public function orders()
+    {
+        return view('site.orders');
+    }
+
+    
     public function diamond()
     {
         return view('site.diamond');

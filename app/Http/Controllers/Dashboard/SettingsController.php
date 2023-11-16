@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Settings;
+use Storage;
 class SettingsController extends Controller
 {
  
@@ -44,6 +45,11 @@ class SettingsController extends Controller
         $info->ios_link = $request->ios_link;
         if ($request->hasFile('logo')) {
             $info->logo =  basename($request->file('logo')->store('settings'));
+        }
+        if ($request->hasFile('user_default_image')) {
+           $user_default_image = basename($request->file('user_default_image')->store('users'));
+           Storage::delete('users/user-default.png');
+           Storage::move('users/'.$user_default_image, 'users/user-default.png');
         }
         $info->save();
         return redirect()->back()->with('success' ,  'تم التعديل بنجاح' );

@@ -41,11 +41,20 @@ $lang = LaravelLocalization::getCurrentLocale();
 						</legend>
 						<div class="form-group row">
 
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div  class='mb-2' >
 									<label class="col-form-label">شعار الموقع </label>
 									<input type="file" class="form-control @error('logo') is-invalid @enderror" name="logo"  >
 									@error('logo')
+									<p  class='text-danger' >  {{ $message }} </p>
+									@enderror
+								</div>
+							</div>	
+							<div class="col-md-6">
+								<div  class='mb-2' >
+									<label class="col-form-label"> صور المستخدم الافتراضيه </label>
+									<input type="file" class="form-control @error('user_default_image') is-invalid @enderror" name="user_default_image"  >
+									@error('user_default_image')
 									<p  class='text-danger' >  {{ $message }} </p>
 									@enderror
 								</div>
@@ -151,11 +160,16 @@ $lang = LaravelLocalization::getCurrentLocale();
 							<div class="col-md-12">
 								<div  class='mb-2' >
 									<label class="col-form-label">شعار الموقع الحالى </label>
-									
 									<img class='img-thumbnail img-responsive' src="{{ Storage::url('settings/'.$info->logo) }}" alt="">
 								</div>
 							</div>	
 
+							<div class="col-md-12">
+								<div  class='mb-2' >
+									<label class="col-form-label"> صوره الملف الشخصى للمستخدم  الافتراضيه الحاليه </label>
+									<img class='img-thumbnail img-responsive' src="{{ Storage::url('users/user-default.png') }}" alt="">
+								</div>
+							</div>	
 
 						</div>						
 					</fieldset>
